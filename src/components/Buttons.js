@@ -1,4 +1,3 @@
-import React from 'react';
 import styled from 'styled-components';
 
 const StyledButton = styled.button`
@@ -21,7 +20,11 @@ const StyledButton = styled.button`
 
 const Button = (props) => {
   const { type, content } = props;
-  return <StyledButton type={type}>{content}</StyledButton>;
+  return (
+    <StyledButton type={type} disabled={type === 'deactivate'}>
+      {content}
+    </StyledButton>
+  );
 };
 
 export default Button;
