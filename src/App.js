@@ -1,12 +1,8 @@
 import React from 'react';
-
+import Button from './components/Buttons';
 
 function App() {
-  return (
-    <div>
-      hello, world!
-    </div>
-  );
+  return <Button type="activate" content="완료" />;
 }
 
 export default App;
