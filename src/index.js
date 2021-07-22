@@ -15,7 +15,7 @@ const GlobalStyle = createGlobalStyle`
   }
 
   #root{
-    margin: 0 15px;
+    margin: 0 16px;
   }
 
   input{
