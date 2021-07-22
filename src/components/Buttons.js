@@ -2,8 +2,8 @@ import styled from 'styled-components';
 
 const StyledButton = styled.button`
   width: 100%;
-  height: 48px;
-  border-radius: 3px;
+  height: 4.8rem;
+  border-radius: 0.3rem;
   background-color: ${(props) => {
     switch (props.type) {
       case 'activate':
