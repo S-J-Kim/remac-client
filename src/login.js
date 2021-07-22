@@ -52,33 +52,33 @@ const BackIcon = styled.div`
   font-family: Pretendard;
   font-style: normal;
   font-weight: bold;
-  font-size: 20px;
-  line-height: 24px;
+  font-size: 2rem;
+  line-height: 2.4rem;
   /* identical to box height */
   align-items: center;
   color: #292929;
-  margin-top: 28px;
-  margin-bottom: 69px;
+  margin-top: 2.8rem;
+  margin-bottom: 6.9rem;
 `;
 const BackIconImg = styled.img`
-  margin-right: 11px;
+  margin-right: 1.1rem;
 `;
 
 const InputName = styled.div`
   font-family: Pretendard;
   font-style: normal;
   font-weight: 600;
-  font-size: 15px;
-  line-height: 18px;
+  font-size: 1.5rem;
+  line-height: 1.8rem;
   /* identical to box height */
 
   color: #292929;
-  margin-bottom: 8px;
+  margin-bottom: 0.8rem;
 `;
 
 const IDInput = styled(Input)`
-  margin-bottom: 14px;
+  margin-bottom: 1.4rem;
 `;
 const PasswordInput = styled(Input)`
-  margin-bottom: 40px;
+  margin-bottom: 4rem;
 `;
