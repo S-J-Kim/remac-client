@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import Button from './components/Buttons';
 import Input from './components/Inputs';
+import SectionHeader from './components/SectionHeader';
 
 export default function LoginView() {
   const [id, setID] = useState('');
@@ -23,11 +24,10 @@ export default function LoginView() {
     setEventFlag(false);
   }, [eventFlag]);
   return (
-    <div>
-      <BackIcon>
-        <BackIconImg src={process.env.PUBLIC_URL + '/backIcon.svg'} />
-        로그인
-      </BackIcon>
+    <Container>
+      <LoginHeader>
+        <SectionHeader title={'로그인'} />
+      </LoginHeader>
       <InputName>아이디</InputName>
       <IDInput
         onChange={(e) => handleInputChange(e, 0)}
@@ -41,27 +41,32 @@ export default function LoginView() {
         value={password}
         placeholder="8자 이상 12글자 이하 "
       />
-      <Button type={buttonType} content="로그인" onClick={loginButtonClicked} />
-      <Button content="회원가입" onClick={loginButtonClicked} />
-      <div>크리에이터 회원가입</div>
-    </div>
+      <LoginButton>
+        <Button
+          type={buttonType}
+          content="로그인"
+          onClick={loginButtonClicked}
+        />
+      </LoginButton>
+      <JoinButton>
+        <Button content="회원가입" onClick={loginButtonClicked} />
+      </JoinButton>
+      <CreaterJoinButton>크리에이터 회원가입</CreaterJoinButton>
+    </Container>
   );
 }
-const BackIcon = styled.div`
+const Container = styled.div`
   display: flex;
-  font-family: Pretendard;
+  flex-direction: column;
+`;
+const LoginHeader = styled.div`
   font-style: normal;
   font-weight: bold;
   font-size: 2rem;
   line-height: 2.4rem;
   /* identical to box height */
-  align-items: center;
   color: #292929;
-  margin-top: 2.8rem;
   margin-bottom: 6.9rem;
-`;
-const BackIconImg = styled.img`
-  margin-right: 1.1rem;
 `;
 
 const InputName = styled.div`
@@ -81,4 +86,19 @@ const IDInput = styled(Input)`
 `;
 const PasswordInput = styled(Input)`
   margin-bottom: 4rem;
+`;
+const LoginButton = styled.div`
+  margin-bottom: 1.2rem;
+`;
+const JoinButton = styled.div`
+  margin-bottom: 2rem;
+`;
+const CreaterJoinButton = styled.div`
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 14px;
+  text-align: center;
+  text-decoration-line: underline;
+  color: #94999e;
 `;
