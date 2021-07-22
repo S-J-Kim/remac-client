@@ -1,15 +1,24 @@
 import React from 'react';
-import Button from './components/Buttons';
-import Input from './components/Inputs';
-import SectionHeader from './components/SectionHeader';
-
+import { Switch, Route } from 'react-router-dom';
 import LoginView from './login';
+import ProfileImageApply from './ProfileImageApply';
+
 function App() {
   return (
-    <div>
-      <LoginView></LoginView>
-
-    </div>
+    <Switch>
+      <Route
+        path="/login"
+        render={() => {
+          <LoginView />;
+        }}
+      />
+      <Route
+        path="/signup"
+        render={() => {
+          <ProfileImageApply />;
+        }}
+      />
+    </Switch>
   );
 }
 
