@@ -6,6 +6,10 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import { createGlobalStyle } from 'styled-components';
 
 const GlobalStyle = createGlobalStyle`
+  * {
+    font-family: Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', sans-serif;
+  }
+
   html{
     font-size: 62.5%;
   }
@@ -15,7 +19,8 @@ const GlobalStyle = createGlobalStyle`
   }
 
   #root{
-    margin: 0 16px;
+    margin: 0 1.6rem;
+    padding-top:5.1rem;
   }
 
   input{
