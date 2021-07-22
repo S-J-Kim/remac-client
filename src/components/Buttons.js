@@ -22,9 +22,9 @@ const Button = (props) => {
   const { type, content, onClick } = props;
   return (
     <StyledButton
+      onClick={onClick}
       type={type}
       disabled={type === 'deactivate'}
-      onClick={onClick}
     >
       {content}
     </StyledButton>
