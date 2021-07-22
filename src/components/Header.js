@@ -11,15 +11,18 @@ const Header = (props) => {
 };
 
 const HeaderContainer = styled.header`
-  position: sticky;
+  position: fixed;
   top: 0;
+  right: 0;
+  padding: 0 1.5rem;
   width: 100%;
-  height: 6.1rem;
+  height: 5.1rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
   background: #ffffff;
-  box-shadow: 0 0.2rem 0.3rem rgba(0, 0, 0, 0.08);
+  box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.08);
+  box-sizing: border-box;
 `;
 
 const MainImage = styled.img`
