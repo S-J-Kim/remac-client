@@ -3,10 +3,12 @@ import Button from './components/Buttons';
 import Input from './components/Inputs';
 import SectionHeader from './components/SectionHeader';
 
+import LoginView from './login';
 function App() {
   return (
     <div>
-      <SectionHeader title="회원가입" />
+      <LoginView></LoginView>
+
     </div>
   );
 }
