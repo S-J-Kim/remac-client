@@ -3,7 +3,8 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import Header from './components/Header';
 import { BrowserRouter as Router } from 'react-router-dom';
-import { createGlobalStyle } from 'styled-components';
+import { createGlobalStyle, ThemeProvider } from 'styled-components';
+import { theme } from './styles/theme';
 
 const GlobalStyle = createGlobalStyle`
   * {
@@ -30,11 +31,13 @@ const GlobalStyle = createGlobalStyle`
 
 ReactDOM.render(
   <React.StrictMode>
-    <GlobalStyle />
-    <Header />
-    <Router>
-      <App />
-    </Router>
+    <ThemeProvider theme={theme}>
+      <GlobalStyle />
+      <Header />
+      <Router>
+        <App />
+      </Router>
+    </ThemeProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );
