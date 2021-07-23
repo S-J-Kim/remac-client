@@ -60,12 +60,6 @@ const Container = styled.div`
   flex-direction: column;
 `;
 const LoginHeader = styled.div`
-  font-style: normal;
-  font-weight: bold;
-  font-size: 2rem;
-  line-height: 2.4rem;
-  /* identical to box height */
-  color: #292929;
   margin-bottom: 6.9rem;
 `;
 

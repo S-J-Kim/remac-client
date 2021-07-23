@@ -3,8 +3,9 @@ import styled from 'styled-components';
 import Button from './components/Buttons';
 import Input from './components/Inputs';
 import SectionHeader from './components/SectionHeader';
+import { Title } from './components/Text';
 
-export default function JoinView() {
+export default function RequesterSignUpView() {
   const [buttonType, setButtonType] = useState('deactivate');
   const [joinData, setJoinData] = useState({
     id: '',
@@ -58,36 +59,36 @@ export default function JoinView() {
   }, [eventFlag]);
   return (
     <Container>
-      <div>
+      <SectionContainer>
         <SectionHeader title="회원가입" />
-      </div>
-      <div>
-        아이디<span>*</span>
-      </div>
-      <Input
+      </SectionContainer>
+      <InputText size="sm">
+        아이디<Star>*</Star>
+      </InputText>
+      <InputBox
         onChange={(e) => handleInputChange(e, 0)}
         placeholder="6자 이상 12자 이하"
       />
-      <div>
-        비밀번호<span>*</span>
-      </div>
-      <Input
+      <InputText size="sm">
+        비밀번호<Star>*</Star>
+      </InputText>
+      <InputBox
         onChange={(e) => handleInputChange(e, 1)}
         placeholder="8자 이상 12자 이하 "
         type="password"
       />
-      <div>
-        비밀번호 확인<span>*</span>
-      </div>
-      <Input
+      <InputText size="sm">
+        비밀번호 확인 <Star>*</Star>
+      </InputText>
+      <InputBox
         onChange={handlePasswordCheck}
         placeholder="비밀번호를 확인해주세요."
         type="password"
       />
-      <div>
-        닉네임<span>*</span>
-      </div>
-      <Input
+      <InputText size="sm">
+        닉네임 <Star>*</Star>
+      </InputText>
+      <NickNameInputBox
         onChange={(e) => handleInputChange(e, 2)}
         placeholder="2글자 이상 12글자 이하, 한글, 영문, 숫자 입력 가능"
       />
@@ -118,4 +119,19 @@ function checkID(str) {
 const Container = styled.div`
   display: flex;
   flex-direction: column;
+`;
+const SectionContainer = styled.div`
+  margin-bottom: 7rem;
+`;
+const InputText = styled(Title)`
+  margin-bottom: 0.8rem;
+`;
+const Star = styled.span`
+  color: #ed6565;
+`;
+const InputBox = styled(Input)`
+  margin-bottom: 1.4rem;
+`;
+const NickNameInputBox = styled(Input)`
+  margin-bottom: 4rem;
 `;
