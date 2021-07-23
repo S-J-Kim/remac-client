@@ -15,7 +15,7 @@ export default function LoginView() {
     else setPassword(e.target.value);
   }
   function loginButtonClicked(e) {
-    console.log('hellod');
+    console.log(id, password);
   }
 
   useEffect(() => {

@@ -25,9 +25,10 @@ const BackButton = styled.img`
 `;
 
 const SectionTitle = styled.div`
-  font-size: 20px;
+  font-size: 2rem;
   font-weight: 700;
   color: #414141;
+  line-height: 2.4rem;
 `;
 
 export default SectionHeader;
