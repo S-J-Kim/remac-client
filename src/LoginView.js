@@ -51,7 +51,7 @@ export default function LoginView() {
       <JoinButton>
         <Button content="회원가입" onClick={loginButtonClicked} />
       </JoinButton>
-      <CreaterJoinButton>크리에이터 회원가입</CreaterJoinButton>
+      <CreatorJoinButton>크리에이터 회원가입</CreatorJoinButton>
     </Container>
   );
 }
@@ -87,7 +87,7 @@ const LoginButton = styled.div`
 const JoinButton = styled.div`
   margin-bottom: 2rem;
 `;
-const CreaterJoinButton = styled.div`
+const CreatorJoinButton = styled.div`
   font-style: normal;
   font-weight: normal;
   font-size: 12px;
