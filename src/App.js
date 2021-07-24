@@ -6,18 +6,8 @@ import ProfileImageApply from './ProfileImageApply';
 function App() {
   return (
     <Switch>
-      <Route
-        path="/login"
-        render={() => {
-          <LoginView />;
-        }}
-      />
-      <Route
-        path="/signup"
-        render={() => {
-          <ProfileImageApply />;
-        }}
-      />
+      <Route path="/login" render={() => <LoginView />} />
+      <Route path="/signup" render={() => <ProfileImageApply />} />
     </Switch>
   );
 }

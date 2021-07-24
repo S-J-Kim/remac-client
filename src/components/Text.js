@@ -15,13 +15,14 @@ export const Title = styled.div`
     }
   }};
   font-weight: ${(props) => {
-    switch (props.type) {
-      case 'lg' || 'md':
+    switch (props.size) {
+      case 'lg':
+      case 'md':
         return 'bold';
       case 'sm':
-        return 'semibold';
+        return 600;
       case 'sm-medium':
-        return 'medium';
+        return 500;
     }
   }};
 `;
@@ -30,10 +31,10 @@ export const Paragraph = styled.div`
   color: ${(props) =>
     props.size === 'lg' ? theme.colors.black : theme.colors.gray};
   font-weight: ${(props) => {
-    return props.size === ('lg' || 'md' || 'xs') ? 'regular' : 'semibold';
+    return props.size === ('lg' || 'md' || 'xs') ? 400 : 600;
   }};
   font-size: ${(props) => {
-    switch (props.type) {
+    switch (props.size) {
       case 'lg':
         return theme.fontSize.lg;
       case 'md':
