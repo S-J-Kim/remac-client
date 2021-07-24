@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import Header from './components/Header';
-import { BrowserRouter as Router } from 'react-router-dom';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { createGlobalStyle, ThemeProvider } from 'styled-components';
 import { theme } from './styles/theme';
 
@@ -20,6 +20,8 @@ const GlobalStyle = createGlobalStyle`
   }
 
   #root{
+    display: flex;
+    flex-direction: column;
     margin: 0 1.6rem;
     padding-top:5.1rem;
   }

@@ -19,6 +19,7 @@ function App() {
         render={() => <CreatorSignUpView />}
         // <ProfileImageApply />;
       />
+      <Route path="/signup" render={() => <ProfileImageApply />} />
     </Switch>
   );
 }
