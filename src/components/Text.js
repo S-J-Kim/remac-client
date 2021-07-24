@@ -16,9 +16,9 @@ export const Title = styled.div`
   }};
   font-weight: ${(props) => {
     switch (props.size) {
-      case 'lg':
-      case 'md':
-        return 'bold';
+
+      case ('lg', 'md'):
+        return 700;
       case 'sm':
         return 600;
       case 'sm-medium':
@@ -31,7 +31,14 @@ export const Paragraph = styled.div`
   color: ${(props) =>
     props.size === 'lg' ? theme.colors.black : theme.colors.gray};
   font-weight: ${(props) => {
-    return props.size === ('lg' || 'md' || 'xs') ? 400 : 600;
+
+    switch (props.size) {
+      case ('lg', 'md', 'xs'):
+        return 400;
+      default:
+        return 600;
+    }
+
   }};
   font-size: ${(props) => {
     switch (props.size) {
