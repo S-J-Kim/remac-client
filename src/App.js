@@ -3,6 +3,7 @@ import { Switch, Route } from 'react-router-dom';
 import RequesterSignUpView from './RequesterSignUpView';
 import LoginView from './LoginView';
 import ProfileImageApply from './ProfileImageApply';
+import CreatorSignUpView from './CreatorSignUpView';
 
 function App() {
   return (
@@ -15,7 +16,7 @@ function App() {
       />
       <Route
         path="/creatorsignup"
-        render={() => <RequesterSignUpView />}
+        render={() => <CreatorSignUpView />}
         // <ProfileImageApply />;
       />
     </Switch>
