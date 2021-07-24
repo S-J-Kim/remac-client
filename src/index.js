@@ -22,7 +22,6 @@ const GlobalStyle = createGlobalStyle`
   #root{
     display: flex;
     flex-direction: column;
-    margin: 0 1.6rem;
     padding-top:5.1rem;
   }
 

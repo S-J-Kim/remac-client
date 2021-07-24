@@ -1,14 +1,15 @@
 import SectionHeader from './components/SectionHeader';
-import React, { Fragment } from 'react';
+import React from 'react';
 import Button from './components/Buttons';
 import { Title, Paragraph } from './components/Text';
 import styled from 'styled-components';
+import { Container } from './components/Container';
 
 const ProfileImageApply = (props) => {
   return (
-    <>
+    <Container>
       <SectionHeader title="프로필사진 등록" />
-      <Container>
+      <ContentContainer>
         <ProfileImage src={process.env.PUBLIC_URL + 'favicon.ico'} />
         <Title size="md">리퀘스터이름명</Title>
         <Description size="sm">
@@ -16,12 +17,12 @@ const ProfileImageApply = (props) => {
         </Description>
         <Button type="activate" content="프로필사진 등록" />
         <SkipButton content="건너뛰기" />
-      </Container>
-    </>
+      </ContentContainer>
+    </Container>
   );
 };
 
-const Container = styled.section`
+const ContentContainer = styled.section`
   width: 100%;
   display: flex;
   flex-direction: column;

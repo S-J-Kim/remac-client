@@ -14,7 +14,7 @@ const HeaderContainer = styled.header`
   position: fixed;
   top: 0;
   right: 0;
-  padding: 0 1.5rem;
+  padding: 0 1.6rem;
   width: 100%;
   height: 5.1rem;
   display: flex;
