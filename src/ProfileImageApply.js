@@ -1,23 +1,51 @@
 import SectionHeader from './components/SectionHeader';
-import React from 'react';
+import React, { useState, useRef } from 'react';
 import Button from './components/Buttons';
 import { Title, Paragraph } from './components/Text';
 import styled from 'styled-components';
 import { Container } from './components/Container';
 
 const ProfileImageApply = (props) => {
+  const [profileImage, setProfileImage] = useState();
+  const ref = useRef();
+
+  const handleUploadButtonClick = (e) => {
+    ref.current.click();
+  };
+
+  const handleImageUpload = (e) => {
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      setProfileImage(event.target.result);
+    };
+
+    reader.readAsDataURL(e.target.files[0]);
+  };
+
   return (
     <Container>
       <SectionHeader title="프로필사진 등록" />
       <ContentContainer>
-        <ProfileImage src={process.env.PUBLIC_URL + 'favicon.ico'} />
+        <ProfileImage src={profileImage} />
         <Title size="md">리퀘스터이름명</Title>
         <Description size="sm">
           회원님을 대표하는 사진을 등록해주세요!
         </Description>
-        <Button type="activate" content="프로필사진 등록" />
+        <Button
+          type="activate"
+          content="갤러리 이동"
+          onClick={handleUploadButtonClick}
+        />
         <SkipButton content="건너뛰기" />
       </ContentContainer>
+      <input
+        ref={ref}
+        onChange={handleImageUpload}
+        name="profileImage"
+        type="file"
+        accept="image/*"
+        hidden
+      />
     </Container>
   );
 };
@@ -37,6 +65,7 @@ const ProfileImage = styled.img`
   border: 1px solid #d2d6da;
   margin-top: 7.5rem;
   margin-bottom: 3.5rem;
+  object-fit: cover;
 `;
 
 const Description = styled(Paragraph)`

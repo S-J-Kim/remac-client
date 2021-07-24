@@ -6,7 +6,7 @@ const SectionHeader = (props) => {
 
   return (
     <SectionHeaderContainer>
-      <BackButton src={process.env.PUBLIC_URL + 'backbutton.svg'} />
+      <BackButton src={process.env.PUBLIC_URL + '/backbutton.svg'} />
       <SectionTitle>{title}</SectionTitle>
     </SectionHeaderContainer>
   );

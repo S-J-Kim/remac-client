@@ -4,8 +4,8 @@ import styled from 'styled-components';
 const Header = (props) => {
   return (
     <HeaderContainer>
-      <MainImage src={process.env.PUBLIC_URL + 'mainlogo.svg'} />
-      <UserIcon src={process.env.PUBLIC_URL + 'usericon.svg'} />
+      <MainImage src={process.env.PUBLIC_URL + '/mainlogo.svg'} />
+      <UserIcon src={process.env.PUBLIC_URL + '/usericon.svg'} />
     </HeaderContainer>
   );
 };
