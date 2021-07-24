@@ -7,10 +7,15 @@ import { Container } from './components/Container';
 
 const ProfileImageApply = (props) => {
   const [profileImage, setProfileImage] = useState();
+
   const ref = useRef();
 
   const handleUploadButtonClick = (e) => {
     ref.current.click();
+  };
+
+  const handleCompleteButtonClick = (e) => {
+    alert('complete!');
   };
 
   const handleImageUpload = (e) => {
@@ -20,7 +25,22 @@ const ProfileImageApply = (props) => {
     };
 
     reader.readAsDataURL(e.target.files[0]);
+
+    setButtonAttribute({
+      content: '가입 완료',
+      onClick: handleCompleteButtonClick,
+    });
+    setSkipButton('');
   };
+
+  const [buttonAttribute, setButtonAttribute] = useState({
+    content: '갤러리 이동',
+    onClick: handleUploadButtonClick,
+  });
+
+  const [skipButton, setSkipButton] = useState(
+    <SkipButton content="건너뛰기" />
+  );
 
   return (
     <Container>
@@ -31,12 +51,8 @@ const ProfileImageApply = (props) => {
         <Description size="sm">
           회원님을 대표하는 사진을 등록해주세요!
         </Description>
-        <Button
-          type="activate"
-          content="갤러리 이동"
-          onClick={handleUploadButtonClick}
-        />
-        <SkipButton content="건너뛰기" />
+        <Button type="activate" {...buttonAttribute} />
+        {skipButton}
       </ContentContainer>
       <input
         ref={ref}
