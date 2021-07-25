@@ -5,6 +5,7 @@ import Input from './components/Inputs';
 import SectionHeader from './components/SectionHeader';
 import { Title, Paragraph } from './components/Text';
 import { Container } from './components/Container';
+import { useHistory } from 'react-router';
 export default function CreatorSignUpView() {
   const [buttonType, setButtonType] = useState('deactivate');
   const [joinData, setJoinData] = useState({
@@ -20,9 +21,14 @@ export default function CreatorSignUpView() {
   });
   const [passwordCheck, setPasswordCheck] = useState(false);
   const [eventFlag, setEventFlag] = useState(false);
+  const history = useHistory();
   function joinButtonClicked(e) {
     if (!passwordCheck) alert('비밀번호를 확인해주세요');
-    else console.log(joinData);
+    else
+      history.push({
+        pathname: '/signup/profile',
+        state: { type: 'creator' },
+      });
   }
   function handleInputChange(e, inputID) {
     setEventFlag(true);
@@ -114,23 +120,26 @@ export default function CreatorSignUpView() {
             val={joinData['category']}
           >
             <option value="">카테고리를 선택해주세요</option>
-            <option value="animal">동물</option>
+            {categories.map((category) => (
+              <option value={category} key={categories.indexOf(category)}>
+                {category}
+              </option>
+            ))}
           </Select>
         </Div>
-
+        <InputText size="sm">
+          채널 URL<Star>*</Star>
+        </InputText>
+        <InputBox
+          onChange={(e) => handleInputChange(e, 5)}
+          placeholder="채널 URL을 입력해주세요"
+        />
         <InputText size="sm">
           한줄소개<Star>*</Star>
         </InputText>
         <InputBox
           onChange={(e) => handleInputChange(e, 4)}
           placeholder="4자 이상 20자 이하 작성"
-        />
-        <InputText size="sm">
-          채널링크<Star>*</Star>
-        </InputText>
-        <InputBox
-          onChange={(e) => handleInputChange(e, 5)}
-          placeholder="운영하는 유투브 채널링크를 입력해주세요"
         />
       </SubContainer>
       <LastContainer>
@@ -141,14 +150,16 @@ export default function CreatorSignUpView() {
         <Div>
           <Img src={process.env.PUBLIC_URL + '/Vector.svg'} />
           <Select
-            name="category"
-            onChange={(e) => handleInputChange(e, 3)}
+            name="bank"
+            onChange={(e) => handleInputChange(e, 6)}
             placeholder="카테고리를 선택해주세요"
-            val={joinData['category']}
+            val={joinData['bank']}
           >
             <option value="">카테고리를 선택해주세요</option>
-            {options.map((option) => (
-              <option value={option}>{option}</option>
+            {banks.map((bank) => (
+              <option value={bank} key={banks.indexOf(bank)}>
+                {bank}
+              </option>
             ))}
           </Select>
         </Div>
@@ -176,22 +187,6 @@ export default function CreatorSignUpView() {
     </MainContainer>
   );
 }
-function checkNickname(str) {
-  const regExp = /[^가-힣a-zA-Z0-9]/g;
-  if (regExp.test(str)) {
-    return true;
-  } else {
-    return false;
-  }
-}
-function checkID(str) {
-  const regExp = /[^a-zA-Z0-9]/g;
-  if (regExp.test(str)) {
-    return true;
-  } else {
-    return false;
-  }
-}
 const MainContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -204,7 +199,7 @@ const TitleContainer = styled.div`
 const SubContainer = styled(Container)`
   padding-bottom: 2.6rem;
   border-bottom: 0.5rem solid #f2f2f2;
-  margin-bottom: 3rem;
+  margin-bottom: 3.1rem;
 `;
 const LastContainer = styled(Container)`
   margin-bottom: 3.4rem;
@@ -234,6 +229,7 @@ const Select = styled.select`
   border-radius: 3px;
   border: 1px solid #d2d6da;
   padding: 1.5rem 0.9rem 1.5rem 0.9rem;
+  font-size: 1.5rem;
   font-weight: ${(props) => {
     switch (props.val) {
       case '':
@@ -255,7 +251,7 @@ const Select = styled.select`
   -webkit-appearance: none; /* for chrome */
   -moz-appearance: none; /*for firefox*/
   appearance: none;
-  z-index: 4;
+
   &:focus {
     outline: none;
     border: 1px solid #ed6565;
@@ -269,12 +265,11 @@ const Div = styled.div`
   position: relative;
 `;
 const Img = styled.img`
-  z-index: 1;
   position: absolute;
   right: 1.2rem;
   top: 2rem;
 `;
-const options = [
+const banks = [
   '신한은행',
   '카카오뱅크',
   '농협',
@@ -282,6 +277,20 @@ const options = [
   '우리은행',
   '기업은행',
   '하나은행',
-  '케이뱅크',
-  '우체국',
+];
+const categories = [
+  '패션/뷰티',
+  '푸드',
+  '일상',
+  'asmr',
+  '게임',
+  '동물',
+  '영화',
+  '음악/춤',
+  '스포츠',
+  '테크',
+  '지식정보',
+  '뉴스',
+  'FUN',
+  '기타',
 ];
