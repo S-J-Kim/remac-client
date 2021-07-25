@@ -1,21 +1,29 @@
-import SectionHeader from './components/SectionHeader';
 import React, { useState, useRef } from 'react';
+import styled from 'styled-components';
+import axios from 'axios';
+import SectionHeader from './components/SectionHeader';
 import Button from './components/Buttons';
 import { Title, Paragraph } from './components/Text';
-import styled from 'styled-components';
 import { Container } from './components/Container';
+import { useHistory } from 'react-router-dom';
 
-const ProfileImageApply = (props) => {
+const ProfileImageApply = ({ props }) => {
   const [profileImage, setProfileImage] = useState();
-
   const ref = useRef();
+  const history = useHistory();
+
+  const uploadProfileImage = () => {
+    const uploadURI =
+      props.type === 'req' ? '[URL for Requester]' : '[URL for Creator]';
+  };
 
   const handleUploadButtonClick = (e) => {
     ref.current.click();
   };
 
   const handleCompleteButtonClick = (e) => {
-    alert('complete!');
+    // uploadProfileImage() // Post user's profile image to server
+    history.push('/signup/complete');
   };
 
   const handleImageUpload = (e) => {
