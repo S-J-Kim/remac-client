@@ -4,6 +4,7 @@ import RequesterSignUpView from './RequesterSignUpView';
 import LoginView from './LoginView';
 import ProfileImageApply from './ProfileImageApply';
 import CreatorSignUpView from './CreatorSignUpView';
+import SignupCompleteView from './SignupCompleteView';
 
 function App() {
   return (
@@ -24,6 +25,10 @@ function App() {
         path="/signup/profile"
         exact
         render={() => <ProfileImageApply />}
+      />
+      <Route
+        path="/signup/complete"
+        render={() => <SignupCompleteView userType="req" />}
       />
     </Switch>
   );
