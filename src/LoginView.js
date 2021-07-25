@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import Button from './components/Buttons';
 import Input from './components/Inputs';
 import SectionHeader from './components/SectionHeader';
+import { Container } from './components/Container';
 
 export default function LoginView() {
   const [id, setID] = useState('');
@@ -55,10 +56,7 @@ export default function LoginView() {
     </Container>
   );
 }
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
+
 const LoginHeader = styled.div`
   margin-bottom: 6.9rem;
 `;

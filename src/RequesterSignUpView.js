@@ -4,7 +4,7 @@ import Button from './components/Buttons';
 import Input from './components/Inputs';
 import SectionHeader from './components/SectionHeader';
 import { Title } from './components/Text';
-
+import { Container } from './components/Container';
 export default function RequesterSignUpView() {
   const [buttonType, setButtonType] = useState('deactivate');
   const [joinData, setJoinData] = useState({
@@ -116,10 +116,6 @@ function checkID(str) {
     return false;
   }
 }
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
 const SectionContainer = styled.div`
   margin-bottom: 7rem;
 `;
