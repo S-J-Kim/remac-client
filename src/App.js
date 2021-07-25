@@ -11,6 +11,7 @@ function App() {
       <Route path="/login" render={() => <LoginView />} />
       <Route
         path="/signup"
+        exact
         render={() => <RequesterSignUpView />}
         // <ProfileImageApply />;
       />
@@ -19,7 +20,11 @@ function App() {
         render={() => <CreatorSignUpView />}
         // <ProfileImageApply />;
       />
-      <Route path="/signup" render={() => <ProfileImageApply />} />
+      <Route
+        path="/signup/profile"
+        exact
+        render={() => <ProfileImageApply />}
+      />
     </Switch>
   );
 }
