@@ -16,8 +16,8 @@ export const Title = styled.div`
   }};
   font-weight: ${(props) => {
     switch (props.size) {
-
-      case ('lg', 'md'):
+      case 'lg':
+      case 'md':
         return 700;
       case 'sm':
         return 600;
@@ -31,14 +31,14 @@ export const Paragraph = styled.div`
   color: ${(props) =>
     props.size === 'lg' ? theme.colors.black : theme.colors.gray};
   font-weight: ${(props) => {
-
     switch (props.size) {
-      case ('lg', 'md', 'xs'):
+      case 'lg':
+      case 'md':
+      case 'sm':
         return 400;
       default:
         return 600;
     }
-
   }};
   font-size: ${(props) => {
     switch (props.size) {
