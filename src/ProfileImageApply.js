@@ -5,16 +5,18 @@ import SectionHeader from './components/SectionHeader';
 import Button from './components/Buttons';
 import { Title, Paragraph } from './components/Text';
 import { Container } from './components/Container';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 
 const ProfileImageApply = ({ props }) => {
   const [profileImage, setProfileImage] = useState();
   const ref = useRef();
   const history = useHistory();
-
+  const location = useLocation();
   const uploadProfileImage = () => {
     const uploadURI =
-      props.type === 'req' ? '[URL for Requester]' : '[URL for Creator]';
+      location.state.type === 'req'
+        ? '[URL for Requester]'
+        : '[URL for Creator]';
   };
 
   const handleUploadButtonClick = (e) => {

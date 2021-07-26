@@ -4,7 +4,8 @@ import Button from './components/Buttons';
 import Input from './components/Inputs';
 import SectionHeader from './components/SectionHeader';
 import { Title } from './components/Text';
-
+import { Container } from './components/Container';
+import { useHistory } from 'react-router';
 export default function RequesterSignUpView() {
   const [buttonType, setButtonType] = useState('deactivate');
   const [joinData, setJoinData] = useState({
@@ -14,6 +15,7 @@ export default function RequesterSignUpView() {
   });
   const [passwordCheck, setPasswordCheck] = useState(false);
   const [eventFlag, setEventFlag] = useState(false);
+  const history = useHistory();
   function joinButtonClicked(e) {
     if (!passwordCheck) alert('비밀번호를 확인해주세요');
     else if (joinData['id'].length < 6 || joinData['id'].length > 12)
@@ -36,7 +38,11 @@ export default function RequesterSignUpView() {
       );
     else if (checkNickname(joinData['nickname']))
       alert('닉네임에 특수문자는 입력할 수 없습니다.');
-    else console.log(joinData);
+    else
+      history.push({
+        pathname: '/signup/profile',
+        state: { type: 'req' },
+      });
   }
   function handleInputChange(e, inputID) {
     setEventFlag(true);
@@ -116,10 +122,6 @@ function checkID(str) {
     return false;
   }
 }
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
 const SectionContainer = styled.div`
   margin-bottom: 7rem;
 `;
