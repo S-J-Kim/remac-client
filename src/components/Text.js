@@ -1,5 +1,10 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { theme } from '../styles/theme';
+
+export const marginControl = css`
+  margin-top: ${(props) => `${props.mt}rem`};
+  margin-bottom: ${(props) => `${props.mb}rem`};
+`;
 
 export const Title = styled.div`
   color: ${theme.colors.black};
@@ -25,6 +30,7 @@ export const Title = styled.div`
         return 500;
     }
   }};
+  ${marginControl}
 `;
 
 export const Paragraph = styled.div`
@@ -34,8 +40,9 @@ export const Paragraph = styled.div`
     switch (props.size) {
       case 'lg':
       case 'md':
-      case 'sm':
+      case 'xs':
         return 400;
+      case 'sm':
       default:
         return 600;
     }
@@ -52,4 +59,5 @@ export const Paragraph = styled.div`
         return theme.fontSize.xs;
     }
   }};
+  ${marginControl}
 `;

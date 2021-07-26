@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { marginControl } from './Text';
 
 const StyledButton = styled.button`
   width: 100%;
@@ -16,16 +17,19 @@ const StyledButton = styled.button`
   }};
   color: ${(props) => (props.type ? '#FFFFFF' : '#94999E')};
   border: ${(props) => (props.type ? 'none' : '1px solid #94999E')};
+  ${marginControl}
 `;
 
 const Button = (props) => {
-  const { type, content, onClick, className } = props;
+  const { type, content, onClick, classNam, mt, mb } = props;
   return (
     <StyledButton
       onClick={onClick}
       type={type}
       disabled={type === 'deactivate'}
       className={className}
+      mt={mt}
+      mb={mb}
     >
       {content}
     </StyledButton>
