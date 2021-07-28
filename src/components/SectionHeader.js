@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-
+import { marginControl } from './Text';
 const SectionHeader = (props) => {
   const { title } = props;
 
@@ -17,6 +17,7 @@ const SectionHeaderContainer = styled.div`
   margin-top: 2.8rem;
   display: flex;
   align-items: center;
+  ${marginControl}
 `;
 
 const BackButton = styled.img`
