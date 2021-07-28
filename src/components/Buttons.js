@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { marginControl } from './Text';
+import { theme } from '../styles/theme';
 
 const StyledButton = styled.button`
   width: 100%;
@@ -36,4 +37,18 @@ const Button = (props) => {
   );
 };
 
+const ProductionStatusIndicator = styled.div`
+  width: 5.2rem;
+  height: 2.1rem;
+  border-radius: 10rem;
+  color: white;
+  background-color: ${theme.colors.pink};
+  font-weight: 500;
+  font-size: 11px;
+  text-align: center;
+  line-height: 2.1rem;
+`;
+
 export default Button;
+
+export { ProductionStatusIndicator };
