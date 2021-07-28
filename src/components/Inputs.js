@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { marginControl } from './Text';
 
 const Input = styled.input`
   width: 100%;
@@ -9,6 +10,7 @@ const Input = styled.input`
   font-weight: 600;
   color: #292929;
   font-family: Pretendard;
+  ${marginControl}
   &:focus {
     outline: none;
     border: 1px solid #ed6565;

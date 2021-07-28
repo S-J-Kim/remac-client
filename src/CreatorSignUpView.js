@@ -71,46 +71,52 @@ export default function CreatorSignUpView() {
   return (
     <MainContainer>
       <SubContainer>
-        <TitleContainer>
-          <SectionHeader title="크리에이터 회원가입" />
-        </TitleContainer>
-        <SubTitle size="md">회원정보</SubTitle>
-        <InputText size="sm">
+        <SectionHeader title="크리에이터 회원가입" mt={2.8} mb={5.8} />
+        <Title mb={1.8} size="md">
+          회원정보
+        </Title>
+        <Title mb={0.8} size="sm">
           아이디<Star>*</Star>
-        </InputText>
-        <InputBox
+        </Title>
+        <Input
+          mb={1.4}
           onChange={(e) => handleInputChange(e, 0)}
           placeholder="6자 이상 12자 이하"
         />
-        <InputText size="sm">
+        <Title mb={0.8} size="sm">
           비밀번호<Star>*</Star>
-        </InputText>
-        <InputBox
+        </Title>
+        <Input
+          mb={1.4}
           onChange={(e) => handleInputChange(e, 1)}
           placeholder="6자 이상 12자 이하"
           type="password"
         />
-        <InputText size="sm">
+        <Title mb={0.8} size="sm">
           비밀번호 확인<Star>*</Star>
-        </InputText>
-        <InputBox
+        </Title>
+        <Input
+          mb={1.4}
           onChange={handlePasswordCheck}
           placeholder="비밀번호를 확인해주세요."
           type="password"
         />
       </SubContainer>
       <SubContainer>
-        <SubTitle size="md">채널정보</SubTitle>
-        <InputText size="sm">
+        <Title mb={1.8} size="md">
+          채널정보
+        </Title>
+        <Title mb={0.8} size="sm">
           채널명<Star>*</Star>
-        </InputText>
-        <InputBox
+        </Title>
+        <Input
+          mb={1.4}
           onChange={(e) => handleInputChange(e, 2)}
           placeholder="운영하는 유투브 채널명을 입력해주세요"
         />
-        <InputText size="sm">
+        <Title mb={0.8} size="sm">
           카테고리<Star>*</Star>
-        </InputText>
+        </Title>
         <Div>
           <Img src={process.env.PUBLIC_URL + '/Vector.svg'} />
           <Select
@@ -127,26 +133,30 @@ export default function CreatorSignUpView() {
             ))}
           </Select>
         </Div>
-        <InputText size="sm">
+        <Title mb={0.8} size="sm">
           채널 URL<Star>*</Star>
-        </InputText>
-        <InputBox
+        </Title>
+        <Input
+          mb={1.4}
           onChange={(e) => handleInputChange(e, 5)}
           placeholder="채널 URL을 입력해주세요"
         />
-        <InputText size="sm">
+        <Title mb={0.8} size="sm">
           한줄소개<Star>*</Star>
-        </InputText>
-        <InputBox
+        </Title>
+        <Input
+          mb={1.4}
           onChange={(e) => handleInputChange(e, 4)}
           placeholder="4자 이상 20자 이하 작성"
         />
       </SubContainer>
       <LastContainer>
-        <SubTitle size="md">계좌정보</SubTitle>
-        <InputText size="sm">
+        <Title mb={1.8} size="md">
+          계좌정보
+        </Title>
+        <Title mb={0.8} size="sm">
           은행<Star>*</Star>
-        </InputText>
+        </Title>
         <Div>
           <Img src={process.env.PUBLIC_URL + '/Vector.svg'} />
           <Select
@@ -163,23 +173,25 @@ export default function CreatorSignUpView() {
             ))}
           </Select>
         </Div>
-        <InputText size="sm">
+        <Title mb={0.8} size="sm">
           계좌번호<Star>*</Star>
-        </InputText>
-        <InputBox
+        </Title>
+        <Input
+          mb={1.4}
           onChange={(e) => handleInputChange(e, 7)}
           placeholder="-를 포함하지 않고 작성해주세요"
         />
-        <InputText size="sm">
+        <Title mb={0.8} size="sm">
           입금자명<Star>*</Star>
-        </InputText>
-        <InputBox
+        </Title>
+        <Input
+          mb={1.4}
           onChange={(e) => handleInputChange(e, 8)}
           placeholder="회원님 명의로 된 계좌를 입력해주세요"
         />
       </LastContainer>
       <Container>
-        <Announcement size="xs">
+        <Announcement size="xs" mb={1.8}>
           가입완료를 누르면 <UnderLine>이용약관</UnderLine> 동의로 간주됩니다.
         </Announcement>
         <Button content="다음" type={buttonType} onClick={joinButtonClicked} />
@@ -192,9 +204,6 @@ const MainContainer = styled.div`
   flex-direction: column;
   padding-bottom: 10.3rem;
 `;
-const TitleContainer = styled.div`
-  margin-bottom: 5.8rem;
-`;
 
 const SubContainer = styled(Container)`
   padding-bottom: 2.6rem;
@@ -204,21 +213,11 @@ const SubContainer = styled(Container)`
 const LastContainer = styled(Container)`
   margin-bottom: 3.4rem;
 `;
-const SubTitle = styled(Title)`
-  margin-bottom: 1.8rem;
-`;
-const InputText = styled(Title)`
-  margin-bottom: 0.8rem;
-`;
 const Star = styled.span`
   color: #ed6565;
 `;
-const InputBox = styled(Input)`
-  margin-bottom: 1.4rem;
-`;
 const Announcement = styled(Paragraph)`
   text-align: center;
-  margin-bottom: 1.8rem;
 `;
 const UnderLine = styled.span`
   text-decoration: underline;

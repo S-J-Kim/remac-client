@@ -1,11 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
-
+import { marginControl } from './Text';
 const SectionHeader = (props) => {
-  const { title } = props;
+  const { title, mt, mb } = props;
 
   return (
-    <SectionHeaderContainer>
+    <SectionHeaderContainer mt={mt} mb={mb}>
       <BackButton src={process.env.PUBLIC_URL + '/backbutton.svg'} />
       <SectionTitle>{title}</SectionTitle>
     </SectionHeaderContainer>
@@ -14,9 +14,9 @@ const SectionHeader = (props) => {
 
 const SectionHeaderContainer = styled.div`
   width: 100%;
-  margin-top: 2.8rem;
   display: flex;
   align-items: center;
+  ${marginControl}
 `;
 
 const BackButton = styled.img`
