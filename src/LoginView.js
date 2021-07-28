@@ -26,40 +26,34 @@ export default function LoginView() {
   }, [eventFlag]);
   return (
     <Container>
-      <LoginHeader>
-        <SectionHeader title={'로그인'} />
-      </LoginHeader>
+      <SectionHeader title={'로그인'} mt={2.8} mb={6.9} />
       <InputName>아이디</InputName>
-      <IDInput
+      <Input
+        mb={1.4}
         onChange={(e) => handleInputChange(e, 0)}
         value={id}
         placeholder="6자 이상 12자 이하"
       />
       <InputName>비밀번호</InputName>
-      <PasswordInput
+      <Input
+        mb={4}
         type="password"
         onChange={(e) => handleInputChange(e, 1)}
         value={password}
         placeholder="8자 이상 12글자 이하 "
       />
-      <LoginButton>
-        <Button
-          type={buttonType}
-          content="로그인"
-          onClick={loginButtonClicked}
-        />
-      </LoginButton>
-      <JoinButton>
-        <Button content="회원가입" onClick={loginButtonClicked} />
-      </JoinButton>
+      <Button
+        mb={1.2}
+        type={buttonType}
+        content="로그인"
+        onClick={loginButtonClicked}
+      />
+      <Button mb={2} content="회원가입" onClick={loginButtonClicked} />
+
       <CreatorJoinButton>크리에이터 회원가입</CreatorJoinButton>
     </Container>
   );
 }
-
-const LoginHeader = styled.div`
-  margin-bottom: 6.9rem;
-`;
 
 const InputName = styled.div`
   font-family: Pretendard;
@@ -72,20 +66,7 @@ const InputName = styled.div`
   color: #292929;
   margin-bottom: 0.8rem;
 `;
-
-const IDInput = styled(Input)`
-  margin-bottom: 1.4rem;
-`;
-const PasswordInput = styled(Input)`
-  margin-bottom: 4rem;
-`;
-const LoginButton = styled.div`
-  margin-bottom: 1.2rem;
-`;
-const JoinButton = styled.div`
-  margin-bottom: 2rem;
-`;
-const CreatorJoinButton = styled.div`
+const CreatorJoinButton = styled.a`
   font-style: normal;
   font-weight: normal;
   font-size: 12px;

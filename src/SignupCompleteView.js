@@ -12,9 +12,11 @@ const SignupCompleteView = (props) => {
 
   return (
     <Container>
-      <SectionTitle size="lg">환영합니다 {account.nickname}님!</SectionTitle>
+      <Title size="lg" mt={7.8}>
+        환영합니다 {account.nickname}님!
+      </Title>
       {props.userType === 'req' ? (
-        <SectionDesc size="lg">
+        <SectionDesc size="lg" mt={1.5}>
           보고 싶었던 컨텐츠,
           <br />
           REMAC에서 바로 요청할 수 있어요.
@@ -23,18 +25,15 @@ const SignupCompleteView = (props) => {
         <SectionDesc size="lg"></SectionDesc>
       )}
       <WelcomeImage src="" />
-      <CreatedID size="xs">가입 아이디 : {account.userID}</CreatedID>
+      <CreatedID size="xs" mb={1.5}>
+        가입 아이디 : {account.userID}
+      </CreatedID>
       <Button type="activate" content="홈으로 이동" />
     </Container>
   );
 };
 
-const SectionTitle = styled(Title)`
-  margin-top: 7.8rem;
-`;
-
 const SectionDesc = styled(Paragraph)`
-  margin-top: 1.5rem;
   line-height: 2.4rem;
 `;
 
@@ -45,7 +44,6 @@ const WelcomeImage = styled.img`
 `;
 
 const CreatedID = styled(Paragraph)`
-  margin-bottom: 1.5rem;
   text-align: center;
 `;
 

@@ -54,13 +54,13 @@ const ProfileImageApply = ({ props }) => {
 
   return (
     <Container>
-      <SectionHeader title="프로필사진 등록" />
+      <SectionHeader title="프로필사진 등록" mt={2.8} mb={7.5} />
       <ContentContainer>
         <ProfileImage src={profileImage} />
         <Title size="md">리퀘스터이름명</Title>
-        <Description size="sm">
+        <Paragraph size="sm" mt={8} mb={11.2}>
           회원님을 대표하는 사진을 등록해주세요!
-        </Description>
+        </Paragraph>
         <Button type="activate" {...buttonAttribute} />
         {skipButton}
       </ContentContainer>
@@ -89,14 +89,8 @@ const ProfileImage = styled.img`
   border-radius: 100%;
   background: rgba(229, 229, 229, 0.29);
   border: 1px solid #d2d6da;
-  margin-top: 7.5rem;
   margin-bottom: 3.5rem;
   object-fit: cover;
-`;
-
-const Description = styled(Paragraph)`
-  margin-top: 8px;
-  margin-bottom: 11.2rem;
 `;
 
 const SkipButton = styled(Button)`

@@ -65,36 +65,38 @@ export default function RequesterSignUpView() {
   }, [eventFlag]);
   return (
     <Container>
-      <SectionContainer>
-        <SectionHeader title="회원가입" />
-      </SectionContainer>
-      <InputText size="sm">
+      <SectionHeader title="회원가입" mt={2.8} mb={6.9} />
+      <Title size="sm" mb={0.8}>
         아이디<Star>*</Star>
-      </InputText>
-      <InputBox
+      </Title>
+      <Input
+        mb={1.4}
         onChange={(e) => handleInputChange(e, 0)}
         placeholder="6자 이상 12자 이하"
       />
-      <InputText size="sm">
+      <Title size="sm" mb={0.8}>
         비밀번호<Star>*</Star>
-      </InputText>
-      <InputBox
+      </Title>
+      <Input
+        mb={1.4}
         onChange={(e) => handleInputChange(e, 1)}
         placeholder="8자 이상 12자 이하 "
         type="password"
       />
-      <InputText size="sm">
+      <Title size="sm" mb={0.8}>
         비밀번호 확인 <Star>*</Star>
-      </InputText>
-      <InputBox
+      </Title>
+      <Input
+        mb={1.4}
         onChange={handlePasswordCheck}
         placeholder="비밀번호를 확인해주세요."
         type="password"
       />
-      <InputText size="sm">
+      <Title size="sm" mb={0.8}>
         닉네임 <Star>*</Star>
-      </InputText>
-      <NickNameInputBox
+      </Title>
+      <Input
+        mb={4}
         onChange={(e) => handleInputChange(e, 2)}
         placeholder="2글자 이상 12글자 이하, 한글, 영문, 숫자 입력 가능"
       />
@@ -122,18 +124,6 @@ function checkID(str) {
     return false;
   }
 }
-const SectionContainer = styled.div`
-  margin-bottom: 7rem;
-`;
-const InputText = styled(Title)`
-  margin-bottom: 0.8rem;
-`;
 const Star = styled.span`
   color: #ed6565;
-`;
-const InputBox = styled(Input)`
-  margin-bottom: 1.4rem;
-`;
-const NickNameInputBox = styled(Input)`
-  margin-bottom: 4rem;
 `;
