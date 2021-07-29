@@ -6,7 +6,7 @@ import SectionHeader from './components/SectionHeader';
 import { Title, Paragraph } from './components/Text';
 import { Container } from './components/Container';
 import { useHistory } from 'react-router';
-export default function CreatorSignUpView() {
+export default function CreatorSignUpPage() {
   const [buttonType, setButtonType] = useState('deactivate');
   const [joinData, setJoinData] = useState({
     id: '',
@@ -222,7 +222,7 @@ const Announcement = styled(Paragraph)`
 const UnderLine = styled.span`
   text-decoration: underline;
 `;
-const Select = styled.select`
+export const Select = styled.select`
   width: 100%;
   height: 4.8rem;
   border-radius: 3px;
@@ -259,7 +259,7 @@ const Select = styled.select`
     display: none; /*for IE10,11*/
   }
 `;
-const Div = styled.div`
+export const Div = styled.div`
   margin-bottom: 1.4rem;
   position: relative;
 `;

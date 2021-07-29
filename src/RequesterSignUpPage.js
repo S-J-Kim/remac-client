@@ -6,7 +6,7 @@ import SectionHeader from './components/SectionHeader';
 import { Title } from './components/Text';
 import { Container } from './components/Container';
 import { useHistory } from 'react-router';
-export default function RequesterSignUpView() {
+export default function RequesterSignUpPage() {
   const [buttonType, setButtonType] = useState('deactivate');
   const [joinData, setJoinData] = useState({
     id: '',

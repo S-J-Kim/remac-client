@@ -5,7 +5,7 @@ import Input from './components/Inputs';
 import SectionHeader from './components/SectionHeader';
 import { Container } from './components/Container';
 
-export default function LoginView() {
+export default function LoginPage() {
   const [id, setID] = useState('');
   const [password, setPassword] = useState('');
   const [buttonType, setButtonType] = useState('deactivate');
