@@ -6,6 +6,8 @@ import SectionHeader from './components/SectionHeader';
 import { Title, Paragraph } from './components/Text';
 import { Container } from './components/Container';
 import { useHistory } from 'react-router';
+import { Select } from './components/Select';
+
 export default function CreatorSignUpPage() {
   const [buttonType, setButtonType] = useState('deactivate');
   const [joinData, setJoinData] = useState({
@@ -57,6 +59,7 @@ export default function CreatorSignUpPage() {
     else if (inputID === 8)
       setJoinData((prevData) => ({ ...prevData, depositor: e.target.value }));
   }
+  console.log(joinData);
   function handlePasswordCheck(e) {
     if (e.target.value === joinData['password']) setPasswordCheck(true);
     else setPasswordCheck(false);
@@ -117,22 +120,11 @@ export default function CreatorSignUpPage() {
         <Title mb={0.8} size="sm">
           카테고리<Star>*</Star>
         </Title>
-        <Div>
-          <Img src={process.env.PUBLIC_URL + '/Vector.svg'} />
-          <Select
-            name="category"
-            onChange={(e) => handleInputChange(e, 3)}
-            placeholder="카테고리를 선택해주세요"
-            val={joinData['category']}
-          >
-            <option value="">카테고리를 선택해주세요</option>
-            {categories.map((category) => (
-              <option value={category} key={categories.indexOf(category)}>
-                {category}
-              </option>
-            ))}
-          </Select>
-        </Div>
+        <Select
+          handleSelectChange={(e) => handleInputChange(e, 3)}
+          currentValue={joinData.category}
+          selectOptions={categories}
+        />
         <Title mb={0.8} size="sm">
           채널 URL<Star>*</Star>
         </Title>
@@ -157,22 +149,11 @@ export default function CreatorSignUpPage() {
         <Title mb={0.8} size="sm">
           은행<Star>*</Star>
         </Title>
-        <Div>
-          <Img src={process.env.PUBLIC_URL + '/Vector.svg'} />
-          <Select
-            name="bank"
-            onChange={(e) => handleInputChange(e, 6)}
-            placeholder="카테고리를 선택해주세요"
-            val={joinData['bank']}
-          >
-            <option value="">카테고리를 선택해주세요</option>
-            {banks.map((bank) => (
-              <option value={bank} key={banks.indexOf(bank)}>
-                {bank}
-              </option>
-            ))}
-          </Select>
-        </Div>
+        <Select
+          handleSelectChange={(e) => handleInputChange(e, 6)}
+          currentValue={joinData.bank}
+          selectOptions={banks}
+        />
         <Title mb={0.8} size="sm">
           계좌번호<Star>*</Star>
         </Title>
@@ -222,52 +203,7 @@ const Announcement = styled(Paragraph)`
 const UnderLine = styled.span`
   text-decoration: underline;
 `;
-export const Select = styled.select`
-  width: 100%;
-  height: 4.8rem;
-  border-radius: 3px;
-  border: 1px solid #d2d6da;
-  padding: 1.5rem 0.9rem 1.5rem 0.9rem;
-  font-size: 1.5rem;
-  font-weight: ${(props) => {
-    switch (props.val) {
-      case '':
-        return 400;
-      default:
-        return 600;
-    }
-  }};
-  background: none;
-  color: ${(props) => {
-    switch (props.val) {
-      case '':
-        return '#94999E';
-      default:
-        return '#292929';
-    }
-  }};
-  font-family: Pretendard;
-  -webkit-appearance: none; /* for chrome */
-  -moz-appearance: none; /*for firefox*/
-  appearance: none;
 
-  &:focus {
-    outline: none;
-    border: 1px solid #ed6565;
-  }
-  ::-ms-expand {
-    display: none; /*for IE10,11*/
-  }
-`;
-export const Div = styled.div`
-  margin-bottom: 1.4rem;
-  position: relative;
-`;
-const Img = styled.img`
-  position: absolute;
-  right: 1.2rem;
-  top: 2rem;
-`;
 const banks = [
   '신한은행',
   '카카오뱅크',
