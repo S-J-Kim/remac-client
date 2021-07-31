@@ -1,24 +1,25 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
-import RequesterSignUpView from './RequesterSignUpView';
-import LoginView from './LoginView';
+import RequesterSignUpPage from './RequesterSignUpPage';
+import LoginPage from './LoginPage';
 import ProfileImageApply from './ProfileImageApply';
-import CreatorSignUpView from './CreatorSignUpView';
+import CreatorSignUpPage from './CreatorSignUpPage';
 import SignupCompleteView from './SignupCompleteView';
+import RequestFormPage from './RequestFormPage';
 
 function App() {
   return (
     <Switch>
-      <Route path="/login" render={() => <LoginView />} />
+      <Route path="/login" render={() => <LoginPage />} />
       <Route
         path="/signup"
         exact
-        render={() => <RequesterSignUpView />}
+        render={() => <RequesterSignUpPage />}
         // <ProfileImageApply />;
       />
       <Route
         path="/creatorsignup"
-        render={() => <CreatorSignUpView />}
+        render={() => <CreatorSignUpPage />}
         // <ProfileImageApply />;
       />
       <Route
@@ -30,6 +31,7 @@ function App() {
         path="/signup/complete"
         render={() => <SignupCompleteView userType="req" />}
       />
+      <Route path="/request/form" render={() => <RequestFormPage />} />
     </Switch>
   );
 }
