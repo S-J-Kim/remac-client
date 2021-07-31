@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import Button from './components/Buttons';
-import Input from './components/Inputs';
-import SectionHeader from './components/SectionHeader';
-import { Title, Paragraph } from './components/Text';
-import { Container } from './components/Container';
+import Button from '../components/Buttons';
+import Input from '../components/Inputs';
+import SectionHeader from '../components/SectionHeader';
+import { Title, Paragraph } from '../components/Text';
+import { Container } from '../components/Container';
 import { useHistory } from 'react-router';
-import { Select } from './components/Select';
+import { Select } from '../components/Select';
 
 export default function CreatorSignUpPage() {
   const [buttonType, setButtonType] = useState('deactivate');

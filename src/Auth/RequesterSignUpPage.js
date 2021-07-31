@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import Button from './components/Buttons';
-import Input from './components/Inputs';
-import SectionHeader from './components/SectionHeader';
-import { Title } from './components/Text';
-import { Container } from './components/Container';
+import Button from '../components/Buttons';
+import Input from '../components/Inputs';
+import SectionHeader from '../components/SectionHeader';
+import { Title } from '../components/Text';
+import { Container } from '../components/Container';
 import { useHistory } from 'react-router';
 export default function RequesterSignUpPage() {
   const [buttonType, setButtonType] = useState('deactivate');
