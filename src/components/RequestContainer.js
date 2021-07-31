@@ -33,6 +33,7 @@ const Container = styled.div`
   background: #ffffff;
   box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.1);
   border-radius: 3px;
+  margin-bottom: 1rem;
 `;
 const SubContainer = styled.div`
   padding: 2.2rem 1.3rem 2rem;
