@@ -5,6 +5,7 @@ import LoginPage from './LoginPage';
 import ProfileImageApply from './ProfileImageApply';
 import CreatorSignUpPage from './CreatorSignUpPage';
 import SignupCompleteView from './SignupCompleteView';
+import Mypage from './Mypage/Mypage';
 import RequestFormPage from './RequestFormPage';
 
 function App() {
@@ -31,6 +32,7 @@ function App() {
         path="/signup/complete"
         render={() => <SignupCompleteView userType="req" />}
       />
+      <Route path="/mypage" render={() => <Mypage />} />
       <Route path="/request/form" render={() => <RequestFormPage />} />
     </Switch>
   );
