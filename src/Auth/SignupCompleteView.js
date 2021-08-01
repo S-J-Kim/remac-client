@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { Title, Paragraph } from './components/Text';
-import Button from './components/Buttons';
-import { Container } from './components/Container';
+import { Title, Paragraph } from '../components/Text';
+import Button from '../components/Buttons';
+import { Container } from '../components/Container';
 
 const SignupCompleteView = (props) => {
   const [account] = useState({

@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import Button from './components/Buttons';
-import Input from './components/Inputs';
-import SectionHeader from './components/SectionHeader';
-import { Paragraph, Title } from './components/Text';
-import { Container } from './components/Container';
-import { Select } from './components/Select';
+import Button from '../components/Buttons';
+import Input from '../components/Inputs';
+import SectionHeader from '../components/SectionHeader';
+import { Paragraph, Title } from '../components/Text';
+import { Container } from '../components/Container';
+import { Select } from '../components/Select';
 import { useHistory } from 'react-router';
 
 export default function RequestFormPage() {
