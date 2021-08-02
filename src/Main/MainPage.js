@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router';
 import styled from 'styled-components';
-import { Container } from './components/Container';
-import RequestContainer from './components/RequestContainer';
-import { Paragraph, Title } from './components/Text';
+import { Container } from '../components/Container';
+import RequestContainer from '../components/RequestContainer';
+import { Paragraph, Title } from '../components/Text';
 
 export default function MainPage() {
   const history = useHistory();

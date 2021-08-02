@@ -1,10 +1,10 @@
 import React, { useState, useRef } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
-import SectionHeader from './components/SectionHeader';
-import Button from './components/Buttons';
-import { Title, Paragraph } from './components/Text';
-import { Container } from './components/Container';
+import SectionHeader from '../components/SectionHeader';
+import Button from '../components/Buttons';
+import { Title, Paragraph } from '../components/Text';
+import { Container } from '../components/Container';
 import { useHistory, useLocation } from 'react-router-dom';
 
 const ProfileImageApply = ({ props }) => {

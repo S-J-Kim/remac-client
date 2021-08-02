@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import Button from './components/Buttons';
-import Input from './components/Inputs';
-import SectionHeader from './components/SectionHeader';
-import { Container } from './components/Container';
+import Button from '../components/Buttons';
+import Input from '../components/Inputs';
+import SectionHeader from '../components/SectionHeader';
+import { Container } from '../components/Container';
 
 export default function LoginPage() {
   const [id, setID] = useState('');
