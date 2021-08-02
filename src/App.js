@@ -6,10 +6,12 @@ import ProfileImageApply from './ProfileImageApply';
 import CreatorSignUpPage from './CreatorSignUpPage';
 import SignupCompleteView from './SignupCompleteView';
 import RequestFormPage from './RequestFormPage';
+import MainPage from './MainPage';
 
 function App() {
   return (
     <Switch>
+      <Route path="/" exact={true} render={() => <MainPage />} />
       <Route path="/login" render={() => <LoginPage />} />
       <Route
         path="/signup"
