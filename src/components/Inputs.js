@@ -22,7 +22,6 @@ const Input = styled.input`
     font-size: 1.5rem;
     line-height: 1.8rem;
     /* identical to box height */
-
     color: #94999e;
   }
 `;
