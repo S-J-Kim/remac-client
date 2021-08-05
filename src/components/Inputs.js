@@ -10,6 +10,7 @@ const Input = styled.input`
   font-weight: 600;
   color: #292929;
   font-family: Pretendard;
+  font-size: 1.5rem;
   ${marginControl}
   &:focus {
     outline: none;
