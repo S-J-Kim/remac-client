@@ -58,9 +58,9 @@ const Intro = styled(Paragraph)`
 const SendButton = styled.button`
   border: none;
   background-color: #ffffff;
-  width: 33.3rem;
+  width: 100%;
   height: 3.8rem;
-  margin: 0.5rem;
+  margin: 0.5rem 0;
   padding: 0;
   font-weight: 600;
   font-size: 15px;
