@@ -9,7 +9,7 @@ import { useHistory } from 'react-router';
 export default function RequesterSignUpPage() {
   const [buttonType, setButtonType] = useState('deactivate');
   const [joinData, setJoinData] = useState({
-    id: '',
+    username: '',
     password: '',
     nickname: '',
   });
@@ -18,9 +18,12 @@ export default function RequesterSignUpPage() {
   const history = useHistory();
   function joinButtonClicked(e) {
     if (!passwordCheck) alert('비밀번호를 확인해주세요');
-    else if (joinData['id'].length < 6 || joinData['id'].length > 12)
+    else if (
+      joinData['username'].length < 6 ||
+      joinData['username'].length > 12
+    )
       alert('아이디가 조건에 맞지 않습니다.\n6자 이상 12자 이하');
-    else if (checkID(joinData['id']))
+    else if (checkID(joinData['username']))
       alert(
         '아이디 조건에 맞지 않습니다.\n6자 이상 12자 이하, 영문, 숫자만 입력 가능'
       );
@@ -47,7 +50,7 @@ export default function RequesterSignUpPage() {
   function handleInputChange(e, inputID) {
     setEventFlag(true);
     if (inputID === 0)
-      setJoinData((prevData) => ({ ...prevData, id: e.target.value }));
+      setJoinData((prevData) => ({ ...prevData, username: e.target.value }));
     else if (inputID === 1)
       setJoinData((prevData) => ({ ...prevData, password: e.target.value }));
     else setJoinData((prevData) => ({ ...prevData, nickname: e.target.value }));

@@ -10,13 +10,13 @@ import { useHistory } from 'react-router';
 
 export default function RequestFormPage() {
   const [request, setRequest] = useState({
-    request_name: '',
+    request_title: '',
     request_content: '',
     request_duedate: '',
     request_reward: '',
-    bank: '',
-    account: '',
-    depositor: '',
+    refund_bank: '',
+    refund_account: '',
+    refund_depositor: '',
   });
   const [isCompleted, setIsCompleted] = useState(false);
   function handleInputChange(e) {
@@ -51,7 +51,7 @@ export default function RequestFormPage() {
           placeholder="제목을 입력해주세요"
           id="request_name"
           onChange={handleInputChange}
-          value={request.request_name}
+          value={request.request_title}
         />
         <Title size="sm" mb={0.8}>
           내용
@@ -96,7 +96,7 @@ export default function RequestFormPage() {
         <Select
           id="bank"
           handleSelectChange={handleInputChange}
-          currentValue={request.bank}
+          currentValue={request.refund_bank}
           selectOptions={banks}
         />
         <Title size="sm" mb={0.8}>
@@ -107,7 +107,7 @@ export default function RequestFormPage() {
           placeholder="-를 포함하지 않고 작성해주세요"
           id="account"
           onChange={handleInputChange}
-          value={request.account}
+          value={request.refund_account}
         />
         <Title size="sm" mb={0.8}>
           입금자명
@@ -117,7 +117,7 @@ export default function RequestFormPage() {
           placeholder="회원님 명의로 된 계좌를 입력해주세요"
           id="depositor"
           onChange={handleInputChange}
-          value={request.depositor}
+          value={request.refund_depositor}
         />
       </Container>
       <Divider />

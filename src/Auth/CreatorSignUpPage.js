@@ -11,14 +11,14 @@ import { Select } from '../components/Select';
 export default function CreatorSignUpPage() {
   const [buttonType, setButtonType] = useState('deactivate');
   const [joinData, setJoinData] = useState({
-    id: '',
+    username: '',
     password: '',
-    channelname: '',
-    category: '',
-    introduction: '',
-    channellink: '',
+    nickname: '',
+    channel_category: '',
+    channel_intro: '',
+    channel_url: '',
     bank: '',
-    bankaccount: '',
+    account: '',
     depositor: '',
   });
   const [passwordCheck, setPasswordCheck] = useState(false);
@@ -35,31 +35,30 @@ export default function CreatorSignUpPage() {
   function handleInputChange(e, inputID) {
     setEventFlag(true);
     if (inputID === 0)
-      setJoinData((prevData) => ({ ...prevData, id: e.target.value }));
+      setJoinData((prevData) => ({ ...prevData, username: e.target.value }));
     else if (inputID === 1)
       setJoinData((prevData) => ({ ...prevData, password: e.target.value }));
     else if (inputID === 2)
-      setJoinData((prevData) => ({ ...prevData, channelname: e.target.value }));
+      setJoinData((prevData) => ({ ...prevData, nickname: e.target.value }));
     else if (inputID === 3)
       setJoinData((prevData) => ({
         ...prevData,
-        category: e.target.value,
+        channel_category: e.target.value,
       }));
     else if (inputID === 4)
       setJoinData((prevData) => ({
         ...prevData,
-        introduction: e.target.value,
+        channel_intro: e.target.value,
       }));
     else if (inputID === 5)
-      setJoinData((prevData) => ({ ...prevData, channellink: e.target.value }));
+      setJoinData((prevData) => ({ ...prevData, channel_url: e.target.value }));
     else if (inputID === 6)
       setJoinData((prevData) => ({ ...prevData, bank: e.target.value }));
     else if (inputID === 7)
-      setJoinData((prevData) => ({ ...prevData, bankaccount: e.target.value }));
+      setJoinData((prevData) => ({ ...prevData, account: e.target.value }));
     else if (inputID === 8)
       setJoinData((prevData) => ({ ...prevData, depositor: e.target.value }));
   }
-  console.log(joinData);
   function handlePasswordCheck(e) {
     if (e.target.value === joinData['password']) setPasswordCheck(true);
     else setPasswordCheck(false);
@@ -122,7 +121,7 @@ export default function CreatorSignUpPage() {
         </Title>
         <Select
           handleSelectChange={(e) => handleInputChange(e, 3)}
-          currentValue={joinData.category}
+          currentValue={joinData.channel_category}
           selectOptions={categories}
         />
         <Title mb={0.8} size="sm">
