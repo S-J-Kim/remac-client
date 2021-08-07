@@ -6,6 +6,9 @@ const StyledButton = styled.button`
   width: 100%;
   height: 4.8rem;
   border-radius: 0.3rem;
+  font-weight: 600;
+  font-size: 15px;
+  line-height: 18px;
   background-color: ${(props) => {
     switch (props.type) {
       case 'activate':

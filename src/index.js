@@ -9,6 +9,7 @@ import { theme } from './styles/theme';
 const GlobalStyle = createGlobalStyle`
   * {
     font-family: Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', sans-serif;
+    box-sizing: border-box;
   }
 
   html{

@@ -192,6 +192,7 @@ const RequestContent = styled.textarea`
   color: #292929;
   font-family: Pretendard;
   line-height: 21px;
+  font-size: 1.5rem;
   &:focus {
     outline: none;
     border: 1px solid #ed6565;
@@ -203,6 +204,7 @@ const RequestContent = styled.textarea`
     font-size: 1.5rem;
     line-height: 2.1rem;
     color: #94999e;
+  }
 `;
 const banks = [
   '신한은행',

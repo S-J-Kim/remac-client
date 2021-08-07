@@ -10,6 +10,7 @@ const Input = styled.input`
   font-weight: 600;
   color: #292929;
   font-family: Pretendard;
+  font-size: 1.5rem;
   ${marginControl}
   &:focus {
     outline: none;
@@ -22,7 +23,6 @@ const Input = styled.input`
     font-size: 1.5rem;
     line-height: 1.8rem;
     /* identical to box height */
-
     color: #94999e;
   }
 `;
