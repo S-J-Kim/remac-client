@@ -6,21 +6,21 @@ import SectionHeader from '../components/SectionHeader';
 import { Container } from '../components/Container';
 
 export default function LoginPage() {
-  const [id, setID] = useState('');
+  const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [buttonType, setButtonType] = useState('deactivate');
   const [eventFlag, setEventFlag] = useState(false);
   function handleInputChange(e, inputID) {
     setEventFlag(true);
-    if (inputID === 0) setID(e.target.value);
+    if (inputID === 0) setUsername(e.target.value);
     else setPassword(e.target.value);
   }
   function loginButtonClicked(e) {
-    console.log(id, password);
+    console.log(username, password);
   }
 
   useEffect(() => {
-    if (id && password) setButtonType('activate');
+    if (username && password) setButtonType('activate');
     else setButtonType('deactivate');
     setEventFlag(false);
   }, [eventFlag]);
@@ -31,7 +31,7 @@ export default function LoginPage() {
       <Input
         mb={1.4}
         onChange={(e) => handleInputChange(e, 0)}
-        value={id}
+        value={username}
         placeholder="6자 이상 12자 이하"
       />
       <InputName>비밀번호</InputName>
