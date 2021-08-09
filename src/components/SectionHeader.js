@@ -5,7 +5,7 @@ const SectionHeader = (props) => {
   const { title, mt, mb } = props;
 
   return (
-    <SectionHeaderContainer mt={mt} mb={mb}>
+    <SectionHeaderContainer mt={mt ? mt : 2.8} mb={mb}>
       <BackButton src={process.env.PUBLIC_URL + '/backbutton.svg'} />
       <SectionTitle>{title}</SectionTitle>
     </SectionHeaderContainer>
