@@ -9,7 +9,7 @@ const Header = (props) => {
   }
   return (
     <HeaderContainer>
-      <MainImage src={process.env.PUBLIC_URL + '/mainlogo.svg'} />
+      <MainImage src={process.env.PUBLIC_URL + '/remac-logo-sm.png'} />
       <UserIcon
         src={process.env.PUBLIC_URL + '/usericon.svg'}
         onClick={handleMypageClicked}
