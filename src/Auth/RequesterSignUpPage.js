@@ -6,12 +6,14 @@ import SectionHeader from '../components/SectionHeader';
 import { Title } from '../components/Text';
 import { Container } from '../components/Container';
 import { useHistory } from 'react-router';
+import { Fetchers } from '../fetchers';
 export default function RequesterSignUpPage() {
   const [buttonType, setButtonType] = useState('deactivate');
   const [joinData, setJoinData] = useState({
     username: '',
     password: '',
     nickname: '',
+    is_creator: false,
   });
   const [passwordCheck, setPasswordCheck] = useState(false);
   const [eventFlag, setEventFlag] = useState(false);
@@ -41,11 +43,17 @@ export default function RequesterSignUpPage() {
       );
     else if (checkNickname(joinData['nickname']))
       alert('닉네임에 특수문자는 입력할 수 없습니다.');
-    else
+    else {
+      Fetchers.signupRequester({ param: joinData });
       history.push({
         pathname: '/signup/profile',
-        state: { type: 'req' },
+        state: {
+          type: 'req',
+          nickname: joinData.nickname,
+          username: joinData.username,
+        },
       });
+    }
   }
   function handleInputChange(e, inputID) {
     setEventFlag(true);
@@ -68,7 +76,12 @@ export default function RequesterSignUpPage() {
   }, [eventFlag]);
   return (
     <Container>
-      <SectionHeader title="회원가입" mt={2.8} mb={6.9} />
+      <SectionHeader
+        title="회원가입"
+        mt={2.8}
+        mb={6.9}
+        handleGoBack={() => history.goBack()}
+      />
       <Title size="sm" mb={0.8}>
         아이디<Star>*</Star>
       </Title>

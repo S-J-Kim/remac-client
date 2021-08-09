@@ -3,13 +3,14 @@ import styled from 'styled-components';
 import { Title, Paragraph } from '../components/Text';
 import Button from '../components/Buttons';
 import { Container } from '../components/Container';
+import { useHistory } from 'react-router';
 
 const SignupCompleteView = (props) => {
   const [account] = useState({
     userID: 'testid1234',
     nickname: '리퀘공쥬쥬서영',
   });
-
+  const history = useHistory();
   return (
     <Container>
       <Title size="lg" mt={7.8}>
@@ -28,7 +29,11 @@ const SignupCompleteView = (props) => {
       <CreatedID size="xs" mb={1.5}>
         가입 아이디 : {account.userID}
       </CreatedID>
-      <Button type="activate" content="홈으로 이동" />
+      <Button
+        type="activate"
+        content="홈으로 이동"
+        onClick={() => history.push('/')}
+      />
     </Container>
   );
 };
