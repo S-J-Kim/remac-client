@@ -4,19 +4,28 @@ import Button from '../components/Buttons';
 import Input from '../components/Inputs';
 import SectionHeader from '../components/SectionHeader';
 import { Container } from '../components/Container';
+import { Fetchers } from '../fetchers';
+import { useHistory } from 'react-router';
 
 export default function LoginPage() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [buttonType, setButtonType] = useState('deactivate');
   const [eventFlag, setEventFlag] = useState(false);
+
+  const history = useHistory();
   function handleInputChange(e, inputID) {
     setEventFlag(true);
     if (inputID === 0) setUsername(e.target.value);
     else setPassword(e.target.value);
   }
-  function loginButtonClicked(e) {
-    console.log(username, password);
+  async function loginButtonClicked(e) {
+    const token = Fetchers.signin({
+      param: { username: username, password: password },
+    });
+    if (token) {
+      history.push('/');
+    }
   }
 
   useEffect(() => {
@@ -26,7 +35,12 @@ export default function LoginPage() {
   }, [eventFlag]);
   return (
     <Container>
-      <SectionHeader title={'로그인'} mt={2.8} mb={6.9} />
+      <SectionHeader
+        title={'로그인'}
+        mt={2.8}
+        mb={6.9}
+        handleGoBack={() => history.goBack()}
+      />
       <InputName>아이디</InputName>
       <Input
         mb={1.4}

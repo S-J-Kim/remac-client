@@ -35,8 +35,8 @@ ReactDOM.render(
   <React.StrictMode>
     <ThemeProvider theme={theme}>
       <GlobalStyle />
-      <Header />
       <Router>
+        <Header />
         <App />
       </Router>
     </ThemeProvider>

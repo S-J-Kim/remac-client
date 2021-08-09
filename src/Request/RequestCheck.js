@@ -5,8 +5,10 @@ import { Paragraph, Title } from '../components/Text';
 import styled from 'styled-components';
 import RequestInfo from './assets/RequestInfo';
 import Button from '../components/Buttons';
+import { useHistory } from 'react-router';
 
 const RequestCheck = (props) => {
+  const history = useHistory();
   const [requestInfo, setRequestInfo] = useState({
     creatorName: '보리의 하루',
     category: '동물',
@@ -18,7 +20,7 @@ const RequestCheck = (props) => {
   });
   return (
     <Container>
-      <SectionHeader title="요청 확인" />
+      <SectionHeader title="요청 확인" handleGoBack={() => history.goBack()} />
       <Paragraph size="lg" mt={2.3}>
         {requestInfo.creatorName}님에게 보내는 요청입니다.
       </Paragraph>

@@ -19,6 +19,7 @@ export default function RequestFormPage() {
     refund_depositor: '',
   });
   const [isCompleted, setIsCompleted] = useState(false);
+  const history = useHistory();
   function handleInputChange(e) {
     const { id, value } = e.target;
     setRequest((prev) => ({ ...prev, [id]: value }));
@@ -35,7 +36,12 @@ export default function RequestFormPage() {
   return (
     <div>
       <Container>
-        <SectionHeader title="0000에 요청하기" mt={2.8} mb={3.6} />
+        <SectionHeader
+          title="0000에 요청하기"
+          mt={2.8}
+          mb={3.6}
+          handleGoBack={() => history.goBack()}
+        />
         <Image></Image>
         <NickName size="md" mt={0.4} mb={0.5}>
           민지킴이

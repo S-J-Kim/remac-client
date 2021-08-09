@@ -1,11 +1,19 @@
 import React from 'react';
+import { useHistory } from 'react-router';
 import styled from 'styled-components';
 
 const Header = (props) => {
+  const history = useHistory();
+  function handleMypageClicked() {
+    history.push('/mypage');
+  }
   return (
     <HeaderContainer>
       <MainImage src={process.env.PUBLIC_URL + '/mainlogo.svg'} />
-      <UserIcon src={process.env.PUBLIC_URL + '/usericon.svg'} />
+      <UserIcon
+        src={process.env.PUBLIC_URL + '/usericon.svg'}
+        onClick={handleMypageClicked}
+      />
     </HeaderContainer>
   );
 };

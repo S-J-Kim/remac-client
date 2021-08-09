@@ -3,16 +3,23 @@ import { useHistory } from 'react-router';
 import styled from 'styled-components';
 import { Container } from '../components/Container';
 import RequestContainer from '../components/RequestContainer';
-import { Paragraph, Title } from '../components/Text';
+import { Title } from '../components/Text';
 
 export default function MainPage() {
   const history = useHistory();
+  const [selected, setSelected] = useState('');
   function handleSendButtonClick() {
     history.push('/request/form');
   }
+  function handleCategoryFiltering(e) {
+    console.log(e);
+  }
   return (
     <div>
-      <MainImage />
+      <MainImage
+        src={process.env.PUBLIC_URL + '/banner.svg'}
+        onClick={() => history.push('/signup/creator')}
+      />
       <Container>
         <MainTitle size="md" mb={2.1}>
           보고싶은 영상, <br />
@@ -20,13 +27,32 @@ export default function MainPage() {
         </MainTitle>
       </Container>
       <CategoryContainer>
-        <Category />
-        <Category />
-        <Category />
-        <Category />
-        <Category />
-        <Category />
-        <Category />
+        <Category
+          location={process.env.PUBLIC_URL + '/category/game.svg'}
+          category="게임"
+          handleCategoryClicked={handleCategoryFiltering}
+          id={1}
+        />
+        <Category
+          location={process.env.PUBLIC_URL + '/category/food.svg'}
+          category="푸드"
+          id={2}
+        />
+        <Category
+          location={process.env.PUBLIC_URL + '/category/review.svg'}
+          category="리뷰"
+          id={3}
+        />
+        <Category
+          location={process.env.PUBLIC_URL + '/category/music.svg'}
+          category="음악"
+          id={4}
+        />
+        <Category
+          location={process.env.PUBLIC_URL + '/category/knowledge.svg'}
+          category="학습"
+          id={5}
+        />
       </CategoryContainer>
       <Container>
         <RequestContainer
@@ -44,10 +70,11 @@ export default function MainPage() {
   );
 }
 
-const MainImage = styled.div`
-  height: 22.2rem;
+const MainImage = styled.img`
+  width: 100%;
   margin-bottom: 1.6rem;
   background-color: #123412;
+  object-fit: cover;
 `;
 const CategoryContainer = styled.div`
   display: flex;
@@ -67,18 +94,25 @@ const StyledCategory = styled.div`
   margin-right: 1.1rem;
   text-align: center;
 `;
-const Image = styled.img`
+const Image = styled.div`
   height: 7rem;
   width: 7rem;
   object-fit: cover;
-  border-radius: 30px;
+  border-radius: 50px;
   margin-bottom: 1.1rem;
+  background: #ffffff;
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.07);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
-const Category = () => {
+const Category = ({ location, category }) => {
   return (
     <StyledCategory>
-      <Image />
-      <Title size="sm">푸드</Title>
+      <Image>
+        <img src={location} />
+      </Image>
+      <Title size="sm">{category}</Title>
     </StyledCategory>
   );
 };
