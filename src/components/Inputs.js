@@ -11,6 +11,7 @@ const Input = styled.input`
   color: #292929;
   font-family: Pretendard;
   font-size: 1.5rem;
+  -webkit-appearance: none;
   ${marginControl}
   &:focus {
     outline: none;
