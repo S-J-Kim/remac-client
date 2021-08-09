@@ -5,8 +5,10 @@ import { Container } from '../components/Container';
 import { Paragraph, Title } from '../components/Text';
 import Receipt from '../components/Receipt';
 import Button from '../components/Buttons';
+import { useHistory } from 'react-router';
 
 export default function RewardPaymentPage() {
+  const history = useHistory();
   return (
     <Container>
       <Title size="lg" mt={2.8} mb={2.3}>
@@ -31,7 +33,13 @@ export default function RewardPaymentPage() {
           입금하실 때 입금자명을 “닉네임{request.nickname}”로 해주세요
         </PaymentAnnouncement>
       </PaymentAnnouncementContainer>
-      <Button content="확인" type="activate" mt={5.3} mb={3.7} />
+      <Button
+        content="확인"
+        type="activate"
+        mt={5.3}
+        mb={3.7}
+        onClick={history.push('/')}
+      />
     </Container>
   );
 }

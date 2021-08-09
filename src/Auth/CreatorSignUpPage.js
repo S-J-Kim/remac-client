@@ -7,6 +7,7 @@ import { Title, Paragraph } from '../components/Text';
 import { Container } from '../components/Container';
 import { useHistory } from 'react-router';
 import { Select } from '../components/Select';
+import { Fetchers } from '../fetchers';
 
 export default function CreatorSignUpPage() {
   const [buttonType, setButtonType] = useState('deactivate');
@@ -20,17 +21,24 @@ export default function CreatorSignUpPage() {
     bank: '',
     account: '',
     depositor: '',
+    is_creator: true,
   });
   const [passwordCheck, setPasswordCheck] = useState(false);
   const [eventFlag, setEventFlag] = useState(false);
   const history = useHistory();
-  function joinButtonClicked(e) {
+  async function joinButtonClicked(e) {
     if (!passwordCheck) alert('비밀번호를 확인해주세요');
-    else
+    else {
+      Fetchers.signupCreator({ param: joinData });
       history.push({
         pathname: '/signup/profile',
-        state: { type: 'creator' },
+        state: {
+          type: 'creator',
+          nickname: joinData.nickname,
+          username: joinData.username,
+        },
       });
+    }
   }
   function handleInputChange(e, inputID) {
     setEventFlag(true);
@@ -73,7 +81,12 @@ export default function CreatorSignUpPage() {
   return (
     <MainContainer>
       <SubContainer>
-        <SectionHeader title="크리에이터 회원가입" mt={2.8} mb={5.8} />
+        <SectionHeader
+          title="크리에이터 회원가입"
+          mt={2.8}
+          mb={5.8}
+          handleGoBack={() => history.goBack()}
+        />
         <Title mb={1.8} size="md">
           회원정보
         </Title>

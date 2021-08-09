@@ -54,7 +54,12 @@ const ProfileImageApply = ({ props }) => {
 
   return (
     <Container>
-      <SectionHeader title="프로필사진 등록" mt={2.8} mb={7.5} />
+      <SectionHeader
+        title="프로필사진 등록"
+        mt={2.8}
+        mb={7.5}
+        handleGoBack={() => history.goBack()}
+      />
       <ContentContainer>
         <ProfileImage src={profileImage} />
         <Title size="md">리퀘스터이름명</Title>

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router';
 import styled from 'styled-components';
 import { ProductionStatusIndicator } from '../components/Buttons';
 import { Container } from '../components/Container';
@@ -15,9 +16,10 @@ const Mypage = (props) => {
   const [channelDiscription] = useState('강화도 보더콜리 보리의 우당탕탕 견생');
   const [isCreator, setIsCreator] = useState(true);
 
+  const history = useHistory();
   return (
     <Container>
-      <SectionHeader title="마이페이지" />
+      <SectionHeader title="마이페이지" handleGoBack={() => history.goBack()} />
       <UserInfoSection>
         <UserProfileImage src={undefined} />
         <Title size="md" mt={1.3}>
