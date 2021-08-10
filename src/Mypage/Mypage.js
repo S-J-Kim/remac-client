@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import { useHistory } from 'react-router';
 import styled from 'styled-components';
 import { ProductionStatusIndicator } from '../components/Buttons';
 import { Container } from '../components/Container';
 import SectionHeader from '../components/SectionHeader';
 import { Title, Paragraph } from '../components/Text';
 import { theme } from '../styles/theme';
+import { useAuth } from '../contexts/AuthContextProvider';
 import RequestList from './RequestList';
 
 const Mypage = (props) => {
@@ -16,7 +16,7 @@ const Mypage = (props) => {
   const [channelDiscription] = useState('강화도 보더콜리 보리의 우당탕탕 견생');
   const [isCreator, setIsCreator] = useState(true);
 
-  const history = useHistory();
+  const { history } = useAuth();
   return (
     <Container>
       <SectionHeader title="마이페이지" handleGoBack={() => history.goBack()} />

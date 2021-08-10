@@ -5,7 +5,7 @@ import Input from '../components/Inputs';
 import SectionHeader from '../components/SectionHeader';
 import { Title, Paragraph } from '../components/Text';
 import { Container } from '../components/Container';
-import { useHistory } from 'react-router';
+import { useAuth } from '../contexts/AuthContextProvider';
 import { Select } from '../components/Select';
 import { Fetchers } from '../fetchers';
 
@@ -25,7 +25,8 @@ export default function CreatorSignUpPage() {
   });
   const [passwordCheck, setPasswordCheck] = useState(false);
   const [eventFlag, setEventFlag] = useState(false);
-  const history = useHistory();
+  const { history } = useAuth();
+
   async function joinButtonClicked(e) {
     if (!passwordCheck) alert('비밀번호를 확인해주세요');
     else {

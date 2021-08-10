@@ -5,8 +5,9 @@ import Input from '../components/Inputs';
 import SectionHeader from '../components/SectionHeader';
 import { Title } from '../components/Text';
 import { Container } from '../components/Container';
-import { useHistory } from 'react-router';
+import { useAuth } from '../contexts/AuthContextProvider';
 import { Fetchers } from '../fetchers';
+
 export default function RequesterSignUpPage() {
   const [buttonType, setButtonType] = useState('deactivate');
   const [joinData, setJoinData] = useState({
@@ -17,7 +18,8 @@ export default function RequesterSignUpPage() {
   });
   const [passwordCheck, setPasswordCheck] = useState(false);
   const [eventFlag, setEventFlag] = useState(false);
-  const history = useHistory();
+  const { history } = useAuth();
+
   function joinButtonClicked(e) {
     if (!passwordCheck) alert('비밀번호를 확인해주세요');
     else if (
@@ -44,7 +46,8 @@ export default function RequesterSignUpPage() {
     else if (checkNickname(joinData['nickname']))
       alert('닉네임에 특수문자는 입력할 수 없습니다.');
     else {
-      Fetchers.signupRequester({ param: joinData });
+      const token = Fetchers.signupRequester({ param: joinData });
+      console.log(token);
       history.push({
         pathname: '/signup/profile',
         state: {

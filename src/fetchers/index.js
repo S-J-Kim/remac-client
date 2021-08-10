@@ -1,5 +1,5 @@
 import axios from 'axios';
-const url = '';
+const url = 'https://remac.co.kr';
 
 const getCreator = async () => {
   try {
@@ -24,8 +24,11 @@ const getUserDetail = async () => {
 
 const signin = async ({ param }) => {
   try {
-    const response = await axios.post(url, param);
-    alert(response.data);
+    const response = await axios
+      .post(url + '/account/login/', param)
+      .then(() => {
+        return response.data;
+      });
   } catch {}
 };
 
@@ -44,18 +47,24 @@ const getCategories = async () => {
 };
 
 const signupRequester = async ({ param }) => {
-  const url = 'account/login/';
+  param['channel_category'] = '';
+  param['channel_intro'] = '';
+  param['channel_url'] = '';
+  param['bank'] = '';
+  param['depositor'] = '';
+  param['account'] = '';
   try {
-    const response = await axios.post(url, param);
-    alert(response.data);
-  } catch {}
+    const response = await axios.post(url + '/account/register/', param);
+    return response.data;
+  } catch {
+    alert(1);
+  }
 };
 
 const signupCreator = async ({ param }) => {
-  const url = 'account/register/';
   try {
-    const response = await axios.post(url, param);
-    alert(response.data);
+    const response = await axios.post(url + '/account/register/', param);
+    return response.data;
   } catch {}
 };
 

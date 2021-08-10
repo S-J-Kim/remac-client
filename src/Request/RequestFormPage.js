@@ -6,7 +6,7 @@ import SectionHeader from '../components/SectionHeader';
 import { Paragraph, Title } from '../components/Text';
 import { Container } from '../components/Container';
 import { Select } from '../components/Select';
-import { useHistory } from 'react-router';
+import { useAuth } from '../contexts/AuthContextProvider';
 
 export default function RequestFormPage() {
   const [request, setRequest] = useState({
@@ -19,7 +19,8 @@ export default function RequestFormPage() {
     refund_depositor: '',
   });
   const [isCompleted, setIsCompleted] = useState(false);
-  const history = useHistory();
+  const { history } = useAuth();
+
   function handleInputChange(e) {
     const { id, value } = e.target;
     setRequest((prev) => ({ ...prev, [id]: value }));
