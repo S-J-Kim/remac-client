@@ -5,10 +5,11 @@ import { Container } from '../components/Container';
 import { Paragraph, Title } from '../components/Text';
 import Receipt from '../components/Receipt';
 import Button from '../components/Buttons';
-import { useHistory } from 'react-router';
+import { useAuth } from '../contexts/AuthContextProvider';
 
 export default function RewardPaymentPage() {
-  const history = useHistory();
+  const { history } = useAuth();
+
   return (
     <Container>
       <Title size="lg" mt={2.8} mb={2.3}>

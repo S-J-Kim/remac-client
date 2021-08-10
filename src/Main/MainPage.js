@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { useHistory } from 'react-router';
 import styled from 'styled-components';
 import { Container } from '../components/Container';
 import RequestContainer from '../components/RequestContainer';
 import { Title } from '../components/Text';
+import { useAuth } from '../contexts/AuthContextProvider';
 
 export default function MainPage() {
-  const history = useHistory();
+  const { history } = useAuth();
   const [selected, setSelected] = useState('');
   function handleSendButtonClick() {
     history.push('/request/form');

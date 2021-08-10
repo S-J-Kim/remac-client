@@ -5,6 +5,7 @@ import Header from './components/Header';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { createGlobalStyle, ThemeProvider } from 'styled-components';
 import { theme } from './styles/theme';
+import { AuthContextProvider } from './contexts/AuthContextProvider';
 
 const GlobalStyle = createGlobalStyle`
   * {
@@ -36,8 +37,10 @@ ReactDOM.render(
     <ThemeProvider theme={theme}>
       <GlobalStyle />
       <Router>
-        <Header />
-        <App />
+        <AuthContextProvider>
+          <Header />
+          <App />
+        </AuthContextProvider>
       </Router>
     </ThemeProvider>
   </React.StrictMode>,
