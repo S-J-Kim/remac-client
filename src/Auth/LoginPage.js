@@ -5,15 +5,15 @@ import Input from '../components/Inputs';
 import SectionHeader from '../components/SectionHeader';
 import { Container } from '../components/Container';
 import { Fetchers } from '../fetchers';
-import { useHistory } from 'react-router';
+import { useAuth } from '../contexts/AuthContextProvider';
 
 export default function LoginPage() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [buttonType, setButtonType] = useState('deactivate');
   const [eventFlag, setEventFlag] = useState(false);
+  const { history } = useAuth();
 
-  const history = useHistory();
   function handleInputChange(e, inputID) {
     setEventFlag(true);
     if (inputID === 0) setUsername(e.target.value);
@@ -24,6 +24,7 @@ export default function LoginPage() {
       param: { username: username, password: password },
     });
     if (token) {
+      console.log(token);
       history.push('/');
     }
   }

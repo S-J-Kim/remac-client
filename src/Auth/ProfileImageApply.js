@@ -5,12 +5,13 @@ import SectionHeader from '../components/SectionHeader';
 import Button from '../components/Buttons';
 import { Title, Paragraph } from '../components/Text';
 import { Container } from '../components/Container';
-import { useHistory, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
+import { useAuth } from '../contexts/AuthContextProvider';
 
 const ProfileImageApply = ({ props }) => {
   const [profileImage, setProfileImage] = useState();
   const ref = useRef();
-  const history = useHistory();
+  const { history } = useAuth();
   const location = useLocation();
   const uploadProfileImage = () => {
     const uploadURI =
