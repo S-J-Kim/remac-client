@@ -1,15 +1,26 @@
-import { request } from 'http';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { Container } from '../components/Container';
 import { Paragraph, Title } from '../components/Text';
 import Receipt from '../components/Receipt';
 import Button from '../components/Buttons';
 import { useAuth } from '../contexts/AuthContextProvider';
+import { useLocation } from 'react-router';
+import { Fetchers } from '../fetchers';
 
 export default function RewardPaymentPage() {
-  const { history } = useAuth();
-
+  const { history, authToken } = useAuth();
+  const [userNickName, setUserNickName] = useState('');
+  const location = useLocation();
+  const { request, creatorName } = location.state;
+  useEffect(() => {
+    Fetchers.getUserInformation({ authToken: authToken.access }).then((res) =>
+      setUserNickName(res)
+    );
+  }, []);
+  function handleOkButtonClicked() {
+    history.push('/');
+  }
   return (
     <Container>
       <Title size="lg" mt={2.8} mb={2.3}>
@@ -20,18 +31,18 @@ export default function RewardPaymentPage() {
         이제 곧 리마크에서 볼 수 있어요!
       </FixedAnnouncement>
       <UserAnnouncement size="sm" mb={5.5}>
-        리워드 결제가 확인되면 {request.creator}님에게 <br />
-        {request.title} 요청이 전달됩니다.
+        리워드 결제가 확인되면 {creatorName}님에게 <br />
+        {request.request_title} 요청이 전달됩니다.
       </UserAnnouncement>
       <Receipt
-        date={request.date}
-        bank="리마크 은행"
-        account={request.account}
-        price={request.price}
+        date={request.request_duedate}
+        bank="신한 은행"
+        account={1}
+        price={new Intl.NumberFormat().format(request.request_reward)}
       />
       <PaymentAnnouncementContainer>
         <PaymentAnnouncement size="sm" mt={0.5} mb={0.5}>
-          입금하실 때 입금자명을 “닉네임{request.nickname}”로 해주세요
+          입금하실 때 입금자명을 “{userNickName}”로 해주세요
         </PaymentAnnouncement>
       </PaymentAnnouncementContainer>
       <Button
@@ -39,7 +50,7 @@ export default function RewardPaymentPage() {
         type="activate"
         mt={5.3}
         mb={3.7}
-        onClick={history.push('/')}
+        onClick={handleOkButtonClicked}
       />
     </Container>
   );

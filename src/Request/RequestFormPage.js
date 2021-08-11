@@ -7,9 +7,13 @@ import { Paragraph, Title } from '../components/Text';
 import { Container } from '../components/Container';
 import { Select } from '../components/Select';
 import { useAuth } from '../contexts/AuthContextProvider';
+import { useLocation } from 'react-router';
 
 export default function RequestFormPage() {
+  const location = useLocation();
+  const { creatorId, creatorName, category } = location.state;
   const [request, setRequest] = useState({
+    users: [creatorId],
     request_title: '',
     request_content: '',
     request_duedate: '',
@@ -20,15 +24,25 @@ export default function RequestFormPage() {
   });
   const [isCompleted, setIsCompleted] = useState(false);
   const { history } = useAuth();
-
+  function findSelectId(value, options) {
+    const key = options.filter((option) => option[1] === value);
+    return key[0][0];
+  }
   function handleInputChange(e) {
     const { id, value } = e.target;
-    if (id === 'bank')
-      setRequest((prev) => ({ ...prev, [id]: findSelectId(value, banks) }));
-    setRequest((prev) => ({ ...prev, [id]: value }));
+    if (id === 'refund_bank')
+      setRequest((prev) => ({
+        ...prev,
+        refund_bank: findSelectId(value, banks),
+      }));
+    else setRequest((prev) => ({ ...prev, [id]: value }));
   }
   function handleRequestButtonClick() {
-    //send post request
+    history.push('/request/check', {
+      request: request,
+      creatorName: creatorName,
+      category: category,
+    });
   }
   useEffect(() => {
     setIsCompleted(true);
@@ -58,7 +72,7 @@ export default function RequestFormPage() {
         <Input
           mb={1.4}
           placeholder="제목을 입력해주세요"
-          id="request_name"
+          id="request_title"
           onChange={handleInputChange}
           value={request.request_title}
         />
@@ -103,7 +117,7 @@ export default function RequestFormPage() {
           은행
         </Title>
         <Select
-          id="bank"
+          id="refund_bank"
           handleSelectChange={handleInputChange}
           currentValue={request.refund_bank}
           selectOptions={banks}
@@ -114,7 +128,7 @@ export default function RequestFormPage() {
         <Input
           mb={1.4}
           placeholder="-를 포함하지 않고 작성해주세요"
-          id="account"
+          id="refund_account"
           onChange={handleInputChange}
           value={request.refund_account}
         />
@@ -124,7 +138,7 @@ export default function RequestFormPage() {
         <Input
           mb={2.9}
           placeholder="회원님 명의로 된 계좌를 입력해주세요"
-          id="depositor"
+          id="refund_depositor"
           onChange={handleInputChange}
           value={request.refund_depositor}
         />
@@ -226,7 +240,3 @@ const banks = [
   ['IBK', '기업은행'],
   ['HN', '하나은행'],
 ];
-function findSelectId(value, options) {
-  const key = options.filter((option) => option[1] === value);
-  return key[0][0];
-}

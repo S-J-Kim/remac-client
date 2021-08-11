@@ -1,22 +1,42 @@
 import axios from 'axios';
-import { useAuth } from '../contexts/AuthContextProvider';
+
 const url = 'https://remac.co.kr';
-const getCreator = async () => {
+const getCreators = async () => {
   try {
-    const response = await axios.get(url, { params: { is_creator: true } });
+    const response = await axios.get(url + '/api/mainpage');
     return response.data;
   } catch {}
 };
 
-const createRequest = async ({ param, authToken }) => {
-  try {
-    const response = await axios.post(
-      url + '/api/request/',
-      { headers: { Authorization: authToken } },
-      param
-    );
-    return response.data;
-  } catch {}
+const createRequest = async ({ request, authToken }) => {
+  const config = {
+    method: 'post',
+    headers: {
+      Authorization: `Bearer ${authToken}`,
+      'Content-Type': 'application/json',
+    },
+    data: request,
+  };
+  axios('https://remac.co.kr/api/request/', config)
+    .then((response) => {
+      return 1;
+    })
+    .catch((e) => console.log(e));
+};
+
+const getUserInformation = async ({ authToken }) => {
+  const config = {
+    method: 'get',
+    headers: {
+      Authorization: `Bearer ${authToken}`,
+      'Content-Type': 'application/json',
+    },
+  };
+  const response = await axios(
+    'https://remac.co.kr/account/after_register/',
+    config
+  );
+  return response.data.nickname;
 };
 
 const getUserDetail = async (param) => {
@@ -101,9 +121,10 @@ export const Fetchers = {
   signupCreator,
   signupProfileImage,
   createRequest,
-  getCreator,
+  getCreators,
   getUserDetail,
   getBanks,
   getCategories,
+  getUserInformation,
   postDeliverables,
 };
