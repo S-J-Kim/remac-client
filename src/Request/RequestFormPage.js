@@ -202,6 +202,8 @@ const RequestContent = styled.textarea`
   font-family: Pretendard;
   line-height: 21px;
   font-size: 1.5rem;
+  -webkit-appearance: none;
+
   &:focus {
     outline: none;
     border: 1px solid #ed6565;
