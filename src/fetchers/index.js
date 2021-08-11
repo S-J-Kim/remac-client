@@ -8,10 +8,14 @@ const getCreator = async () => {
   } catch {}
 };
 
-const createRequest = async ({ param }) => {
+const createRequest = async ({ param, authToken }) => {
   try {
-    const response = await axios.post(url, param);
-    console.log(response.data);
+    const response = await axios.post(
+      url + '/api/request/',
+      { headers: { Authorization: authToken } },
+      param
+    );
+    return response.data;
   } catch {}
 };
 

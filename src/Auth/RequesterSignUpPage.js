@@ -18,7 +18,7 @@ export default function RequesterSignUpPage() {
   });
   const [passwordCheck, setPasswordCheck] = useState(false);
   const [eventFlag, setEventFlag] = useState(false);
-  const { history } = useAuth();
+  const { history, setAuthToken } = useAuth();
 
   function joinButtonClicked(e) {
     if (!passwordCheck) alert('비밀번호를 확인해주세요');
@@ -46,15 +46,17 @@ export default function RequesterSignUpPage() {
     else if (checkNickname(joinData['nickname']))
       alert('닉네임에 특수문자는 입력할 수 없습니다.');
     else {
-      const token = Fetchers.signupRequester({ param: joinData });
-      console.log(token);
-      history.push({
-        pathname: '/signup/profile',
-        state: {
-          type: 'req',
-          nickname: joinData.nickname,
-          username: joinData.username,
-        },
+      Fetchers.signupRequester({ param: joinData }).then((token) => {
+        setAuthToken(token);
+        console.log('req signup', token);
+        history.push({
+          pathname: '/signup/profile',
+          state: {
+            type: 'req',
+            nickname: joinData.nickname,
+            username: joinData.username,
+          },
+        });
       });
     }
   }

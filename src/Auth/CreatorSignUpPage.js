@@ -25,23 +25,32 @@ export default function CreatorSignUpPage() {
   });
   const [passwordCheck, setPasswordCheck] = useState(false);
   const [eventFlag, setEventFlag] = useState(false);
-  const { history } = useAuth();
+  const { history, setAuthToken } = useAuth();
 
   async function joinButtonClicked(e) {
     if (!passwordCheck) alert('비밀번호를 확인해주세요');
     else {
-      Fetchers.signupCreator({ param: joinData });
-      history.push({
-        pathname: '/signup/profile',
-        state: {
-          type: 'creator',
-          nickname: joinData.nickname,
-          username: joinData.username,
-        },
+      Fetchers.signupCreator({ param: joinData }).then((token) => {
+        setAuthToken(token);
+        console.log('creator', token);
+
+        history.push({
+          pathname: '/signup/profile',
+          state: {
+            type: 'creator',
+            nickname: joinData.nickname,
+            username: joinData.username,
+          },
+        });
       });
     }
   }
+  function findSelectId(value, options) {
+    const key = options.filter((option) => option[1] === value);
+    return key[0][0];
+  }
   function handleInputChange(e, inputID) {
+    console.log(e.target.id);
     setEventFlag(true);
     if (inputID === 0)
       setJoinData((prevData) => ({ ...prevData, username: e.target.value }));
@@ -52,7 +61,7 @@ export default function CreatorSignUpPage() {
     else if (inputID === 3)
       setJoinData((prevData) => ({
         ...prevData,
-        channel_category: e.target.value,
+        channel_category: findSelectId(e.target.value, categories),
       }));
     else if (inputID === 4)
       setJoinData((prevData) => ({
@@ -62,7 +71,10 @@ export default function CreatorSignUpPage() {
     else if (inputID === 5)
       setJoinData((prevData) => ({ ...prevData, channel_url: e.target.value }));
     else if (inputID === 6)
-      setJoinData((prevData) => ({ ...prevData, bank: e.target.value }));
+      setJoinData((prevData) => ({
+        ...prevData,
+        bank: findSelectId(e.target.value, banks),
+      }));
     else if (inputID === 7)
       setJoinData((prevData) => ({ ...prevData, account: e.target.value }));
     else if (inputID === 8)
@@ -218,27 +230,18 @@ const UnderLine = styled.span`
 `;
 
 const banks = [
-  '신한은행',
-  '카카오뱅크',
-  '농협',
-  '국민은행',
-  '우리은행',
-  '기업은행',
-  '하나은행',
+  ['SH', '신한은행'],
+  ['KA', '카카오뱅크'],
+  ['NH', '농협'],
+  ['KB', '국민은행'],
+  ['WR', '우리은행'],
+  ['IBK', '기업은행'],
+  ['HN', '하나은행'],
 ];
 const categories = [
-  '패션/뷰티',
-  '푸드',
-  '일상',
-  'asmr',
-  '게임',
-  '동물',
-  '영화',
-  '음악/춤',
-  '스포츠',
-  '테크',
-  '지식정보',
-  '뉴스',
-  'FUN',
-  '기타',
+  ['food', '푸드'],
+  ['game', '게임'],
+  ['music', '음악'],
+  ['knowledge', '학습'],
+  ['review', '리뷰'],
 ];
