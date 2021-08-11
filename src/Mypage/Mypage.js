@@ -1,43 +1,68 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { Container } from '../components/Container';
 import SectionHeader from '../components/SectionHeader';
 import { Title, Paragraph } from '../components/Text';
-
+import axios from 'axios';
 import { useAuth } from '../contexts/AuthContextProvider';
 import RequestList from './RequestList';
+import { Fetchers } from '../fetchers/index';
 
 const Mypage = (props) => {
-  const [userNickname] = useState('보리의하루');
-  const [userID] = useState('csm1111');
-  const [userAccount] = useState('신한 110486146544 (임성주)');
-  const [channelCategory] = useState('동물');
-  const [channelDiscription] = useState('강화도 보더콜리 보리의 우당탕탕 견생');
-  const [isCreator, setIsCreator] = useState(true);
+  const [userInfo, setUserInfo] = useState({
+    userAccount: '',
+    userNickname: '',
+    userID: '',
+    userProfileImage: '',
+    channelCategory: '',
+    channelDiscription: '',
+    isCreator: '',
+    requests: [],
+  });
 
-  const { history } = useAuth();
+  const { authToken, history } = useAuth();
+
+  useEffect(() => {
+    Fetchers.getUserDetail({
+      headers: {
+        Authorization: `Bearer ${authToken.access}`,
+      },
+    }).then((res) => {
+      console.log(res);
+      setUserInfo({
+        userAccount: `${res.bank} ${res.account}`,
+        userNickname: res.nickname,
+        userID: res.username,
+        userProfileImage: res.profile_image,
+        channelCategory: res.channel_category,
+        channelDiscription: res.channel_intro,
+        isCreator: res.is_creator,
+        requests: res.requests,
+      });
+    });
+  }, []);
   return (
     <Container>
       <SectionHeader title="마이페이지" handleGoBack={() => history.goBack()} />
       <UserInfoSection>
-        <UserProfileImage src={undefined} />
+        <UserProfileImage src={userInfo.userProfileImage} />
         <Title size="md" mt={1.3}>
-          {userNickname}
+          {userInfo.userNickname}
         </Title>
         <UserInfoContainer>
-          <CreatorData size="xs">{userID}</CreatorData>
-          {isCreator && (
+          <CreatorData size="xs">{userInfo.userID}</CreatorData>
+          {userInfo.isCreator && (
             <>
               <HorizontalDivider />
-              <CreatorData size="xs">{userAccount}</CreatorData>
+              <CreatorData size="xs">{userInfo.userAccount}</CreatorData>
             </>
           )}
         </UserInfoContainer>
         <ChannelDiscriptionContainer>
-          <Title size="sm">{channelCategory}</Title>
+          <Title size="sm">{userInfo.channelCategory}</Title>
           <HorizontalDivider />
           <ChannelDiscription size="md">
-            {channelDiscription}
+            {userInfo.channelDiscription}
           </ChannelDiscription>
         </ChannelDiscriptionContainer>
       </UserInfoSection>
