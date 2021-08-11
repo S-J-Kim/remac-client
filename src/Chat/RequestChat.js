@@ -1,16 +1,12 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
-import ChatItem from './assets/ChatItem';
+import React from 'react';
+import ChattingHeader from '../components/ChattingHeader';
 
 const RequestChat = (props) => {
-  const [type, setType] = useState('check');
-  const [chatData, setChatData] = useState({
-    profileImage: '',
-    videoURL: '',
-    sendTime: '오후 8:30',
-  });
-
-  return <ChatItem type="urlInput" data={chatData} />;
+  return (
+    <>
+      <ChattingHeader />
+    </>
+  );
 };
 
 export default RequestChat;

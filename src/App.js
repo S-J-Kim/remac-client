@@ -5,6 +5,7 @@ import Mypage from './Mypage/Mypage';
 import RequestRouter from './Routers/RequestRouter';
 import AuthRouter from './Routers/AuthRouter';
 import MainPage from './Main/MainPage';
+import RequestChat from './Chat/RequestChat';
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
       <Route path="/login" render={() => <LoginPage />} />
       <Route path="/signup" render={(props) => <AuthRouter {...props} />} />
       <Route path="/mypage" render={() => <Mypage />} />
+      <Route path="/test" render={() => <RequestChat />} />
       <Route path="/request" render={(props) => <RequestRouter {...props} />} />
     </Switch>
   );
