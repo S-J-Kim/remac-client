@@ -1,6 +1,6 @@
 import axios from 'axios';
+import { useAuth } from '../contexts/AuthContextProvider';
 const url = 'https://remac.co.kr';
-
 const getCreator = async () => {
   try {
     const response = await axios.get(url, { params: { is_creator: true } });
@@ -24,11 +24,8 @@ const getUserDetail = async () => {
 
 const signin = async ({ param }) => {
   try {
-    const response = await axios
-      .post(url + '/account/login/', param)
-      .then(() => {
-        return response.data;
-      });
+    const response = await axios.post(url + '/account/login/', param);
+    return response.data;
   } catch {}
 };
 

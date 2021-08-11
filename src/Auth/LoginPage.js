@@ -12,7 +12,7 @@ export default function LoginPage() {
   const [password, setPassword] = useState('');
   const [buttonType, setButtonType] = useState('deactivate');
   const [eventFlag, setEventFlag] = useState(false);
-  const { history } = useAuth();
+  const { history, authToken, setAuthToken } = useAuth();
 
   function handleInputChange(e, inputID) {
     setEventFlag(true);
@@ -20,13 +20,12 @@ export default function LoginPage() {
     else setPassword(e.target.value);
   }
   async function loginButtonClicked(e) {
-    const token = Fetchers.signin({
+    Fetchers.signin({
       param: { username: username, password: password },
-    });
-    if (token) {
-      console.log(token);
+    }).then((token) => {
+      setAuthToken(token);
       history.push('/');
-    }
+    });
   }
 
   useEffect(() => {
