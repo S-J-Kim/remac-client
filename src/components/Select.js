@@ -8,7 +8,7 @@ export const Select = ({
 }) => {
   return (
     <Div>
-      <Img src={process.env.PUBLIC_URL + '/Vector.svg'} />
+      <Img src={process.env.PUBLIC_URL + '/content_open_close_icon.svg'} />
       <StyledSelect
         id={id}
         name="category"
@@ -18,8 +18,8 @@ export const Select = ({
       >
         <option value="">카테고리를 선택해주세요</option>
         {selectOptions.map((option) => (
-          <option value={option} key={selectOptions.indexOf(option)}>
-            {option}
+          <option value={option[1]} key={option[0]}>
+            {option[1]}
           </option>
         ))}
       </StyledSelect>

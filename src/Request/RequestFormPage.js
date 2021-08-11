@@ -23,6 +23,8 @@ export default function RequestFormPage() {
 
   function handleInputChange(e) {
     const { id, value } = e.target;
+    if (id === 'bank')
+      setRequest((prev) => ({ ...prev, [id]: findSelectId(value, banks) }));
     setRequest((prev) => ({ ...prev, [id]: value }));
   }
   function handleRequestButtonClick() {
@@ -214,11 +216,15 @@ const RequestContent = styled.textarea`
   }
 `;
 const banks = [
-  '신한은행',
-  '카카오뱅크',
-  '농협',
-  '국민은행',
-  '우리은행',
-  '기업은행',
-  '하나은행',
+  ['SH', '신한은행'],
+  ['KA', '카카오뱅크'],
+  ['NH', '농협'],
+  ['KB', '국민은행'],
+  ['WR', '우리은행'],
+  ['IBK', '기업은행'],
+  ['HN', '하나은행'],
 ];
+function findSelectId(value, options) {
+  const key = options.filter((option) => option[1] === value);
+  return key[0][0];
+}
