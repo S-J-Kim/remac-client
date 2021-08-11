@@ -57,7 +57,7 @@ const RequestItem = ({ request }) => {
           <Username size="md">{users[0].nickname}</Username>
         </ItemInfoRow>
         <ItemInfoRow>
-          <Reward size="sm">{request_reward}원</Reward>
+          <Reward size="sm">{request_reward.toLocaleString()}원</Reward>
           <Paragraph size="xs">{requestedAt()}</Paragraph>
         </ItemInfoRow>
       </ItemInfoSection>

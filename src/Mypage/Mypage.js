@@ -30,7 +30,7 @@ const Mypage = (props) => {
     }).then((res) => {
       console.log(res);
       setUserInfo({
-        userAccount: ``,
+        userAccount: `${res.bank} ${res.account}`,
         userNickname: res.nickname,
         userID: res.username,
         userProfileImage: res.profile_image,
