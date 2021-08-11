@@ -30,7 +30,7 @@ const Mypage = (props) => {
     }).then((res) => {
       console.log(res);
       setUserInfo({
-        userAccount: `${res.bank} ${res.account}`,
+        userAccount: ``,
         userNickname: res.nickname,
         userID: res.username,
         userProfileImage: res.profile_image,
@@ -66,7 +66,7 @@ const Mypage = (props) => {
           </ChannelDiscription>
         </ChannelDiscriptionContainer>
       </UserInfoSection>
-      <RequestList />
+      <RequestList requests={userInfo.requests} />
     </Container>
   );
 };

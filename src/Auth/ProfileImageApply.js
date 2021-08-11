@@ -20,7 +20,7 @@ const ProfileImageApply = (props) => {
   const uploadProfileImage = () => {
     // dataURL 값이 data:image/jpeg:base64,~~~~~~~ 이므로 ','를 기점으로 잘라서 ~~~~~인 부분만 다시 인코딩
 
-    const byteString = atob(image.split(',')[1]);
+    const byteString = image.split(',')[1];
 
     // // Blob를 구성하기 위한 준비, 이 내용은 저도 잘 이해가 안가서 기술하지 않았습니다.
     // const ab = new ArrayBuffer(byteString.length);
@@ -44,11 +44,11 @@ const ProfileImageApply = (props) => {
       method: 'patch',
       url: 'https://remac.co.kr/api/profileimage/',
       headers: {
-        Authorization: `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjI4NzY5NDY1LCJqdGkiOiI1YjAxNjMzZWE1YTM0Y2Y3OTJmZmFkYWE0NDhhMmUxMiIsInVzZXJfaWQiOjEwLCJ1c2VybmFtZSI6InF3ZXJxd2VyIn0.foDHBa-IZIUN5vExdiVN6nkx8fJEDc_qOlL1Bvs7pFE`,
+        Authorization: `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTYyODg1NzYzOCwianRpIjoiNjdjNzI4MDM0ZmEwNDRiZjhlMjFlYjJhZmJhYjJmZGUiLCJ1c2VyX2lkIjoxMCwidXNlcm5hbWUiOiJxd2VycXdlciJ9.TNv0ICy4yhWqepF2uhBkauTnyX80_Erh1Fll4U_z4CE`,
         'Content-Type': 'application/json',
       },
       data: {
-        profile_image: image,
+        profile_image: byteString,
       },
     };
     axios(config).then((res) => console.log(res));

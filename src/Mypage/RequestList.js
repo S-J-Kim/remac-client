@@ -3,16 +3,17 @@ import styled from 'styled-components';
 import RequestItem from './RequestItem';
 
 const RequestList = (props) => {
-  const [requests, setRequests] = useState([
-    {
-      profileImage: '',
-      title: '이시국에 강릉 여행 브이로그',
-      username: '민지킴이',
-      reward: 5000,
-      status: '진행중',
-      requestedAt: '어제 14:35',
-    },
-  ]);
+  const { requests } = props;
+  // const [requests, setRequests] = useState([
+  //   {
+  //     profileImage: '',
+  //     title: '이시국에 강릉 여행 브이로그',
+  //     username: '민지킴이',
+  //     reward: 5000,
+  //     status: '진행중',
+  //     requestedAt: '어제 14:35',
+  //   },
+  // ]);
   return (
     <RequestListSection>
       <SectionTitle>
