@@ -6,10 +6,10 @@ import { Title } from '../components/Text';
 import { useAuth } from '../contexts/AuthContextProvider';
 
 export default function MainPage() {
-  const { history } = useAuth();
+  const { authToken, history } = useAuth();
   const [selected, setSelected] = useState('');
   function handleSendButtonClick() {
-    history.push('/request/form');
+    authToken ? history.push('/request/form') : history.push('/login');
   }
   function handleCategoryFiltering(e) {
     console.log(e);

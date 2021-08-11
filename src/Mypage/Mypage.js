@@ -58,13 +58,15 @@ const Mypage = (props) => {
             </>
           )}
         </UserInfoContainer>
-        <ChannelDiscriptionContainer>
-          <Title size="sm">{userInfo.channelCategory}</Title>
-          <HorizontalDivider />
-          <ChannelDiscription size="md">
-            {userInfo.channelDiscription}
-          </ChannelDiscription>
-        </ChannelDiscriptionContainer>
+        {userInfo.isCreator && (
+          <ChannelDiscriptionContainer>
+            <Title size="sm">{userInfo.channelCategory}</Title>
+            <HorizontalDivider />
+            <ChannelDiscription size="md">
+              {userInfo.channelDiscription}
+            </ChannelDiscription>
+          </ChannelDiscriptionContainer>
+        )}
       </UserInfoSection>
       <RequestList requests={userInfo.requests} />
     </Container>
