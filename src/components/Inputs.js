@@ -17,7 +17,7 @@ const Input = styled.input`
     outline: none;
     border: 1px solid #ed6565;
   }
-  ::placeholder {
+  &::placeholder {
     font-family: Pretendard;
     font-style: normal;
     font-weight: normal;

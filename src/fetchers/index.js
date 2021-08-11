@@ -68,16 +68,31 @@ const signupCreator = async ({ param }) => {
   } catch {}
 };
 
-const postDeliverables = async ({ param }) => {
+const signupProfileImage = async ({ param }) => {
   try {
-    const response = await axios.post(url, param);
+    const response = await axios.post(url + '/api/profileimage/', param);
     return response.data;
   } catch {}
 };
+
+const postDeliverables = async ({ param }) => {
+  try {
+    const response = await axios.post(url, {
+      headers: {
+        Authorization:
+          'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjI4Njk4NjAzLCJqdGkiOiI1NmY2ODJlNDI0NjM0YzcyYTYzMmQ4ZTUyMjNiNzI0NiIsInVzZXJfaWQiOjEwLCJ1c2VybmFtZSI6InF3ZXJxd2VyIn0.EMkyia-oDSHhGRtlAWd22Y84vd6mJukh7FDLzksmWrM',
+      },
+      param,
+    });
+    return response.data;
+  } catch {}
+};
+
 export const Fetchers = {
   signin,
   signupRequester,
   signupCreator,
+  signupProfileImage,
   createRequest,
   getCreator,
   getUserDetail,

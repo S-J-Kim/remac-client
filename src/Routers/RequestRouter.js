@@ -1,5 +1,6 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
+import RequestChat from '../Chat/RequestChat';
 import RequestCheck from '../Request/RequestCheck';
 import RequestFormPage from '../Request/RequestFormPage';
 import RewardPaymentPage from '../Request/RewardPaymentPage';
@@ -14,6 +15,7 @@ const RequestRouter = (props) => {
         render={() => <RewardPaymentPage />}
       />
       <Route path={match.url + '/check'} render={() => <RequestCheck />} />
+      <Route path={match.url + '/'} exact render={() => <RequestChat />} />
     </>
   );
 };

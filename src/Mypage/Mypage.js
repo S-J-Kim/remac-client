@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { ProductionStatusIndicator } from '../components/Buttons';
 import { Container } from '../components/Container';
 import SectionHeader from '../components/SectionHeader';
 import { Title, Paragraph } from '../components/Text';
-import { theme } from '../styles/theme';
+
 import { useAuth } from '../contexts/AuthContextProvider';
 import RequestList from './RequestList';
 

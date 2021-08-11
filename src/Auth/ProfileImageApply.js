@@ -7,17 +7,22 @@ import { Title, Paragraph } from '../components/Text';
 import { Container } from '../components/Container';
 import { useLocation } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContextProvider';
+import { Fetchers } from '../fetchers';
+import { createReadStream } from 'fs';
 
 const ProfileImageApply = ({ props }) => {
   const [profileImage, setProfileImage] = useState();
+  const [profileImageURL, setProfileImageURL] = useState();
   const ref = useRef();
   const { history } = useAuth();
   const location = useLocation();
+  const FormData = require('form-data');
+
   const uploadProfileImage = () => {
-    const uploadURI =
-      location.state.type === 'req'
-        ? '[URL for Requester]'
-        : '[URL for Creator]';
+    let data = new FormData();
+    data.append('profile_image', createReadStream(profileImageURL));
+    const res = Fetchers.signupRequester({ data });
+    alert(res);
   };
 
   const handleUploadButtonClick = (e) => {
@@ -25,7 +30,7 @@ const ProfileImageApply = ({ props }) => {
   };
 
   const handleCompleteButtonClick = (e) => {
-    // uploadProfileImage() // Post user's profile image to server
+    uploadProfileImage(); // Post user's profile image to server
     history.push('/signup/complete');
   };
 
@@ -35,7 +40,7 @@ const ProfileImageApply = ({ props }) => {
       setProfileImage(event.target.result);
     };
 
-    reader.readAsDataURL(e.target.files[0]);
+    setProfileImageURL(reader.readAsDataURL(e.target.files[0]));
 
     setButtonAttribute({
       content: '가입 완료',
