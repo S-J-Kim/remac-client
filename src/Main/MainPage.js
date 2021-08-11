@@ -7,15 +7,17 @@ import { useAuth } from '../contexts/AuthContextProvider';
 import { Fetchers } from '../fetchers';
 
 export default function MainPage() {
-  const { history } = useAuth();
+  const { authToken, history } = useAuth();
   const [selected, setSelected] = useState('');
+
   const [creators, setCreators] = useState([]);
   function handleSendButtonClick(e) {
-    history.push('/request/form', {
+    authToken ? : history.push('/request/form', {
       creatorId: e.target.id,
       creatorName: e.target.parentElement.outerText.split('\n')[0],
       category: e.target.parentElement.outerText.split('\n')[1],
-    });
+    }) : history.push('/login');
+
   }
   function handleCategoryFiltering(e) {
     console.log(e);

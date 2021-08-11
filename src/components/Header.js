@@ -3,14 +3,17 @@ import styled from 'styled-components';
 import { useAuth } from '../contexts/AuthContextProvider';
 
 const Header = (props) => {
-  const { history } = useAuth();
+  const { authToken, history } = useAuth();
 
   function handleMypageClicked() {
-    history.push('/mypage');
+    authToken ? history.push('/mypage') : history.push('/login');
   }
   return (
     <HeaderContainer>
-      <MainImage src={process.env.PUBLIC_URL + '/remac-logo-sm.png'} />
+      <MainImage
+        src={process.env.PUBLIC_URL + '/remac-logo-sm.png'}
+        onClick={() => history.push('/')}
+      />
       <UserIcon
         src={process.env.PUBLIC_URL + '/usericon.svg'}
         onClick={handleMypageClicked}

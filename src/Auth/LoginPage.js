@@ -23,6 +23,7 @@ export default function LoginPage() {
     Fetchers.signin({
       param: { username: username, password: password },
     }).then((token) => {
+      console.log(token);
       setAuthToken(token);
       history.push('/');
     });

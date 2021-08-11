@@ -8,39 +8,79 @@ import { Container } from '../components/Container';
 import { useLocation } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContextProvider';
 import { Fetchers } from '../fetchers';
-import { createReadStream } from 'fs';
 
-const ProfileImageApply = ({ props }) => {
+const ProfileImageApply = (props) => {
   const [profileImage, setProfileImage] = useState();
   const [profileImageURL, setProfileImageURL] = useState();
   const ref = useRef();
-  const { history } = useAuth();
+  const { authToken, history } = useAuth();
   const location = useLocation();
-  const FormData = require('form-data');
+  let image;
 
   const uploadProfileImage = () => {
-    let data = new FormData();
-    data.append('profile_image', createReadStream(profileImageURL));
-    const res = Fetchers.signupRequester({ data });
-    alert(res);
+    // dataURL 값이 data:image/jpeg:base64,~~~~~~~ 이므로 ','를 기점으로 잘라서 ~~~~~인 부분만 다시 인코딩
+
+    const byteString = image.split(',')[1];
+
+    // // Blob를 구성하기 위한 준비, 이 내용은 저도 잘 이해가 안가서 기술하지 않았습니다.
+    // const ab = new ArrayBuffer(byteString.length);
+    // const ia = new Uint8Array(ab);
+    // for (let i = 0; i < byteString.length; i++) {
+    //   ia[i] = byteString.charCodeAt(i);
+    // }
+    // const blob = new Blob([ia], {
+    //   type: 'image/jpeg',
+    // });
+    // const file = new File([blob], 'image.jpg');
+
+    // // 위 과정을 통해 만든 image폼을 FormData에 넣어줍니다.
+    // // 서버에서는 이미지를 받을 때, FormData가 아니면 받지 않도록 세팅해야합니다.
+    const formData = new FormData();
+    formData.append('profile_image', image);
+    // const res = Fetchers.signupProfileImage(formData);
+    // res.then((data) => console.log(data));
+
+    const config = {
+      method: 'patch',
+      url: 'https://remac.co.kr/api/profileimage/',
+      headers: {
+        Authorization: `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjI4NzgzNjg1LCJqdGkiOiIzMzFlZjRiMTVlYjI0YWVlOWNhODc1M2QyMTBmZGVlOSIsInVzZXJfaWQiOjE5fQ.FtMddjWoVxTiOUPNmu0TqpVECtkS0eh2ZEzkp9iwJXo`,
+        'Content-Type': 'application/json',
+      },
+      data: formData,
+    };
+    axios(config).then((res) => console.log(res));
   };
 
   const handleUploadButtonClick = (e) => {
     ref.current.click();
   };
 
-  const handleCompleteButtonClick = (e) => {
+  const handleCompleteButtonClick = () => {
     uploadProfileImage(); // Post user's profile image to server
-    history.push('/signup/complete');
+    history.push({
+      pathname: '/signup/complete',
+      state: {
+        username: location.state.username,
+        nickname: location.state.nickname,
+      },
+    });
   };
 
   const handleImageUpload = (e) => {
     const reader = new FileReader();
     reader.onload = (event) => {
       setProfileImage(event.target.result);
+      setProfileImageURL(e.target.files[0]);
     };
 
-    setProfileImageURL(reader.readAsDataURL(e.target.files[0]));
+    reader.onloadend = () => {
+      setProfileImageURL(reader.result);
+      image = reader.result;
+      console.log(image);
+    };
+
+    reader.readAsDataURL(e.target.files[0]);
 
     setButtonAttribute({
       content: '가입 완료',
@@ -68,8 +108,8 @@ const ProfileImageApply = ({ props }) => {
       />
       <ContentContainer>
         <ProfileImage src={profileImage} />
-        <Title size="md">리퀘스터이름명</Title>
-        <Paragraph size="sm" mt={8} mb={11.2}>
+        <Title size="md">{location.state?.nickname}</Title>
+        <Paragraph size="sm" mt={8} mb={1.12}>
           회원님을 대표하는 사진을 등록해주세요!
         </Paragraph>
         <Button type="activate" {...buttonAttribute} />
