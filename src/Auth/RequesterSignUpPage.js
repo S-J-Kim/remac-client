@@ -5,22 +5,29 @@ import Input from '../components/Inputs';
 import SectionHeader from '../components/SectionHeader';
 import { Title } from '../components/Text';
 import { Container } from '../components/Container';
-import { useHistory } from 'react-router';
+import { useAuth } from '../contexts/AuthContextProvider';
+import { Fetchers } from '../fetchers';
+
 export default function RequesterSignUpPage() {
   const [buttonType, setButtonType] = useState('deactivate');
   const [joinData, setJoinData] = useState({
-    id: '',
+    username: '',
     password: '',
     nickname: '',
+    is_creator: false,
   });
   const [passwordCheck, setPasswordCheck] = useState(false);
   const [eventFlag, setEventFlag] = useState(false);
-  const history = useHistory();
+  const { history, setAuthToken } = useAuth();
+
   function joinButtonClicked(e) {
     if (!passwordCheck) alert('비밀번호를 확인해주세요');
-    else if (joinData['id'].length < 6 || joinData['id'].length > 12)
+    else if (
+      joinData['username'].length < 6 ||
+      joinData['username'].length > 12
+    )
       alert('아이디가 조건에 맞지 않습니다.\n6자 이상 12자 이하');
-    else if (checkID(joinData['id']))
+    else if (checkID(joinData['username']))
       alert(
         '아이디 조건에 맞지 않습니다.\n6자 이상 12자 이하, 영문, 숫자만 입력 가능'
       );
@@ -38,16 +45,25 @@ export default function RequesterSignUpPage() {
       );
     else if (checkNickname(joinData['nickname']))
       alert('닉네임에 특수문자는 입력할 수 없습니다.');
-    else
-      history.push({
-        pathname: '/signup/profile',
-        state: { type: 'req' },
+    else {
+      Fetchers.signupRequester({ param: joinData }).then((token) => {
+        setAuthToken(token);
+        console.log('req signup', token);
+        history.push({
+          pathname: '/signup/profile',
+          state: {
+            type: 'req',
+            nickname: joinData.nickname,
+            username: joinData.username,
+          },
+        });
       });
+    }
   }
   function handleInputChange(e, inputID) {
     setEventFlag(true);
     if (inputID === 0)
-      setJoinData((prevData) => ({ ...prevData, id: e.target.value }));
+      setJoinData((prevData) => ({ ...prevData, username: e.target.value }));
     else if (inputID === 1)
       setJoinData((prevData) => ({ ...prevData, password: e.target.value }));
     else setJoinData((prevData) => ({ ...prevData, nickname: e.target.value }));
@@ -65,7 +81,12 @@ export default function RequesterSignUpPage() {
   }, [eventFlag]);
   return (
     <Container>
-      <SectionHeader title="회원가입" mt={2.8} mb={6.9} />
+      <SectionHeader
+        title="회원가입"
+        mt={2.8}
+        mb={6.9}
+        handleGoBack={() => history.goBack()}
+      />
       <Title size="sm" mb={0.8}>
         아이디<Star>*</Star>
       </Title>

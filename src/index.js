@@ -5,10 +5,12 @@ import Header from './components/Header';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { createGlobalStyle, ThemeProvider } from 'styled-components';
 import { theme } from './styles/theme';
+import { AuthContextProvider } from './contexts/AuthContextProvider';
 
 const GlobalStyle = createGlobalStyle`
   * {
     font-family: Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', sans-serif;
+    box-sizing: border-box;
   }
 
   html{
@@ -34,9 +36,11 @@ ReactDOM.render(
   <React.StrictMode>
     <ThemeProvider theme={theme}>
       <GlobalStyle />
-      <Header />
       <Router>
-        <App />
+        <AuthContextProvider>
+          <Header />
+          <App />
+        </AuthContextProvider>
       </Router>
     </ThemeProvider>
   </React.StrictMode>,

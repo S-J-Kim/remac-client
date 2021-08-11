@@ -5,26 +5,61 @@ import SectionHeader from '../components/SectionHeader';
 import Button from '../components/Buttons';
 import { Title, Paragraph } from '../components/Text';
 import { Container } from '../components/Container';
-import { useHistory, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
+import { useAuth } from '../contexts/AuthContextProvider';
+import { Fetchers } from '../fetchers';
 
-const ProfileImageApply = ({ props }) => {
+const ProfileImageApply = (props) => {
   const [profileImage, setProfileImage] = useState();
+  const [profileImageURL, setProfileImageURL] = useState();
   const ref = useRef();
-  const history = useHistory();
+  const { authToken, history } = useAuth();
   const location = useLocation();
+  let image;
+
   const uploadProfileImage = () => {
-    const uploadURI =
-      location.state.type === 'req'
-        ? '[URL for Requester]'
-        : '[URL for Creator]';
+    // dataURL 값이 data:image/jpeg:base64,~~~~~~~ 이므로 ','를 기점으로 잘라서 ~~~~~인 부분만 다시 인코딩
+
+    const byteString = image.split(',')[1];
+
+    // // Blob를 구성하기 위한 준비, 이 내용은 저도 잘 이해가 안가서 기술하지 않았습니다.
+    // const ab = new ArrayBuffer(byteString.length);
+    // const ia = new Uint8Array(ab);
+    // for (let i = 0; i < byteString.length; i++) {
+    //   ia[i] = byteString.charCodeAt(i);
+    // }
+    // const blob = new Blob([ia], {
+    //   type: 'image/jpeg',
+    // });
+    // const file = new File([blob], 'image.jpg');
+
+    // // 위 과정을 통해 만든 image폼을 FormData에 넣어줍니다.
+    // // 서버에서는 이미지를 받을 때, FormData가 아니면 받지 않도록 세팅해야합니다.
+    const formData = new FormData();
+    formData.append('profile_image', image);
+    // const res = Fetchers.signupProfileImage(formData);
+    // res.then((data) => console.log(data));
+
+    const config = {
+      method: 'patch',
+      url: 'https://remac.co.kr/api/profileimage/',
+      headers: {
+        Authorization: `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTYyODg1NzYzOCwianRpIjoiNjdjNzI4MDM0ZmEwNDRiZjhlMjFlYjJhZmJhYjJmZGUiLCJ1c2VyX2lkIjoxMCwidXNlcm5hbWUiOiJxd2VycXdlciJ9.TNv0ICy4yhWqepF2uhBkauTnyX80_Erh1Fll4U_z4CE`,
+        'Content-Type': 'application/json',
+      },
+      data: {
+        profile_image: byteString,
+      },
+    };
+    axios(config).then((res) => console.log(res));
   };
 
   const handleUploadButtonClick = (e) => {
     ref.current.click();
   };
 
-  const handleCompleteButtonClick = (e) => {
-    // uploadProfileImage() // Post user's profile image to server
+  const handleCompleteButtonClick = () => {
+    uploadProfileImage(); // Post user's profile image to server
     history.push('/signup/complete');
   };
 
@@ -32,6 +67,13 @@ const ProfileImageApply = ({ props }) => {
     const reader = new FileReader();
     reader.onload = (event) => {
       setProfileImage(event.target.result);
+      setProfileImageURL(e.target.files[0]);
+    };
+
+    reader.onloadend = () => {
+      setProfileImageURL(reader.result);
+      image = reader.result;
+      console.log(image);
     };
 
     reader.readAsDataURL(e.target.files[0]);
@@ -54,7 +96,12 @@ const ProfileImageApply = ({ props }) => {
 
   return (
     <Container>
-      <SectionHeader title="프로필사진 등록" mt={2.8} mb={7.5} />
+      <SectionHeader
+        title="프로필사진 등록"
+        mt={2.8}
+        mb={7.5}
+        handleGoBack={() => history.goBack()}
+      />
       <ContentContainer>
         <ProfileImage src={profileImage} />
         <Title size="md">리퀘스터이름명</Title>

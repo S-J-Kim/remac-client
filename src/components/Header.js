@@ -1,11 +1,23 @@
 import React from 'react';
 import styled from 'styled-components';
+import { useAuth } from '../contexts/AuthContextProvider';
 
 const Header = (props) => {
+  const { history } = useAuth();
+
+  function handleMypageClicked() {
+    history.push('/mypage');
+  }
   return (
     <HeaderContainer>
-      <MainImage src={process.env.PUBLIC_URL + '/mainlogo.svg'} />
-      <UserIcon src={process.env.PUBLIC_URL + '/usericon.svg'} />
+      <MainImage
+        src={process.env.PUBLIC_URL + '/remac-logo-sm.png'}
+        onClick={() => history.push('/')}
+      />
+      <UserIcon
+        src={process.env.PUBLIC_URL + '/usericon.svg'}
+        onClick={handleMypageClicked}
+      />
     </HeaderContainer>
   );
 };

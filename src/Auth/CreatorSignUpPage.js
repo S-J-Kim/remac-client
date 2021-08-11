@@ -5,61 +5,81 @@ import Input from '../components/Inputs';
 import SectionHeader from '../components/SectionHeader';
 import { Title, Paragraph } from '../components/Text';
 import { Container } from '../components/Container';
-import { useHistory } from 'react-router';
+import { useAuth } from '../contexts/AuthContextProvider';
 import { Select } from '../components/Select';
+import { Fetchers } from '../fetchers';
 
 export default function CreatorSignUpPage() {
   const [buttonType, setButtonType] = useState('deactivate');
   const [joinData, setJoinData] = useState({
-    id: '',
+    username: '',
     password: '',
-    channelname: '',
-    category: '',
-    introduction: '',
-    channellink: '',
+    nickname: '',
+    channel_category: '',
+    channel_intro: '',
+    channel_url: '',
     bank: '',
-    bankaccount: '',
+    account: '',
     depositor: '',
+    is_creator: true,
   });
   const [passwordCheck, setPasswordCheck] = useState(false);
   const [eventFlag, setEventFlag] = useState(false);
-  const history = useHistory();
-  function joinButtonClicked(e) {
+  const { history, setAuthToken } = useAuth();
+
+  async function joinButtonClicked(e) {
     if (!passwordCheck) alert('비밀번호를 확인해주세요');
-    else
-      history.push({
-        pathname: '/signup/profile',
-        state: { type: 'creator' },
+    else {
+      Fetchers.signupCreator({ param: joinData }).then((token) => {
+        setAuthToken(token);
+        console.log('creator', token);
+
+        history.push({
+          pathname: '/signup/profile',
+          state: {
+            type: 'creator',
+            nickname: joinData.nickname,
+            username: joinData.username,
+          },
+        });
       });
+    }
+  }
+  function findSelectId(value, options) {
+    const key = options.filter((option) => option[1] === value);
+    return key[0][0];
   }
   function handleInputChange(e, inputID) {
+    console.log(e.target.id);
     setEventFlag(true);
     if (inputID === 0)
-      setJoinData((prevData) => ({ ...prevData, id: e.target.value }));
+      setJoinData((prevData) => ({ ...prevData, username: e.target.value }));
     else if (inputID === 1)
       setJoinData((prevData) => ({ ...prevData, password: e.target.value }));
     else if (inputID === 2)
-      setJoinData((prevData) => ({ ...prevData, channelname: e.target.value }));
+      setJoinData((prevData) => ({ ...prevData, nickname: e.target.value }));
     else if (inputID === 3)
       setJoinData((prevData) => ({
         ...prevData,
-        category: e.target.value,
+        channel_category: findSelectId(e.target.value, categories),
       }));
     else if (inputID === 4)
       setJoinData((prevData) => ({
         ...prevData,
-        introduction: e.target.value,
+        channel_intro: e.target.value,
       }));
     else if (inputID === 5)
-      setJoinData((prevData) => ({ ...prevData, channellink: e.target.value }));
+      setJoinData((prevData) => ({ ...prevData, channel_url: e.target.value }));
     else if (inputID === 6)
-      setJoinData((prevData) => ({ ...prevData, bank: e.target.value }));
+      setJoinData((prevData) => ({
+        ...prevData,
+        bank: findSelectId(e.target.value, banks),
+      }));
     else if (inputID === 7)
-      setJoinData((prevData) => ({ ...prevData, bankaccount: e.target.value }));
+      setJoinData((prevData) => ({ ...prevData, account: e.target.value }));
     else if (inputID === 8)
       setJoinData((prevData) => ({ ...prevData, depositor: e.target.value }));
   }
-  console.log(joinData);
   function handlePasswordCheck(e) {
     if (e.target.value === joinData['password']) setPasswordCheck(true);
     else setPasswordCheck(false);
@@ -74,7 +94,12 @@ export default function CreatorSignUpPage() {
   return (
     <MainContainer>
       <SubContainer>
-        <SectionHeader title="크리에이터 회원가입" mt={2.8} mb={5.8} />
+        <SectionHeader
+          title="크리에이터 회원가입"
+          mt={2.8}
+          mb={5.8}
+          handleGoBack={() => history.goBack()}
+        />
         <Title mb={1.8} size="md">
           회원정보
         </Title>
@@ -122,7 +147,7 @@ export default function CreatorSignUpPage() {
         </Title>
         <Select
           handleSelectChange={(e) => handleInputChange(e, 3)}
-          currentValue={joinData.category}
+          currentValue={joinData.channel_category}
           selectOptions={categories}
         />
         <Title mb={0.8} size="sm">
@@ -205,27 +230,18 @@ const UnderLine = styled.span`
 `;
 
 const banks = [
-  '신한은행',
-  '카카오뱅크',
-  '농협',
-  '국민은행',
-  '우리은행',
-  '기업은행',
-  '하나은행',
+  ['SH', '신한은행'],
+  ['KA', '카카오뱅크'],
+  ['NH', '농협'],
+  ['KB', '국민은행'],
+  ['WR', '우리은행'],
+  ['IBK', '기업은행'],
+  ['HN', '하나은행'],
 ];
 const categories = [
-  '패션/뷰티',
-  '푸드',
-  '일상',
-  'asmr',
-  '게임',
-  '동물',
-  '영화',
-  '음악/춤',
-  '스포츠',
-  '테크',
-  '지식정보',
-  '뉴스',
-  'FUN',
-  '기타',
+  ['food', '푸드'],
+  ['game', '게임'],
+  ['music', '음악'],
+  ['knowledge', '학습'],
+  ['review', '리뷰'],
 ];

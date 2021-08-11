@@ -2,10 +2,10 @@ import React from 'react';
 import styled from 'styled-components';
 import { marginControl } from './Text';
 const SectionHeader = (props) => {
-  const { title, mt, mb } = props;
+  const { title, mt, mb, handleGoBack } = props;
 
   return (
-    <SectionHeaderContainer mt={mt} mb={mb}>
+    <SectionHeaderContainer mt={mt ? mt : 2.8} mb={mb} onClick={handleGoBack}>
       <BackButton src={process.env.PUBLIC_URL + '/backbutton.svg'} />
       <SectionTitle>{title}</SectionTitle>
     </SectionHeaderContainer>

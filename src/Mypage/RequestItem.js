@@ -1,26 +1,64 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { ProductionStatusIndicator } from '../components/Buttons';
 import { Title, Paragraph } from '../components/Text';
+import { DateTime, Interval, TIME_24_SIMPLE } from 'luxon';
 
 const RequestItem = ({ request }) => {
-  const { profileImage, title, username, reward, status, requestedAt } =
+  const { request_title, request_status, created, users, request_reward } =
     request;
+
+  const [requestStatus] = useState(() => {
+    switch (request_status) {
+      case 'request':
+        return '요청중';
+      case 'proceed':
+        return '진행중';
+      case 'complete':
+        return '완료';
+      case 'cancel':
+        return '취소';
+    }
+  });
+
+  const requestedAt = () => {
+    const time = DateTime.fromISO(created);
+    const now = DateTime.now();
+
+    const day = () => {
+      const days = Interval.fromDateTimes(time, now);
+      console.log(days.length('days'));
+      switch (days) {
+        case 0:
+          return '오늘';
+        case 1:
+          return '어제';
+        default:
+          return time.get('day');
+      }
+    };
+
+    const month = day() > 2 ? time.get('month') : null;
+    const hourMinutes = time.toLocaleString(DateTime.TIME_24_SIMPLE);
+    console.log(hourMinutes);
+
+    return `${month}월 ${day()}일 ${hourMinutes}`;
+  };
 
   return (
     <ItemContainer>
-      <ProfileImage src={profileImage} />
+      <ProfileImage src={users[0].profile_image} />
       <ItemInfoSection>
         <ItemInfoRow>
-          <RequestTitle size="xs">{title}</RequestTitle>
-          <ProductionStatusIndicator>{status}</ProductionStatusIndicator>
+          <RequestTitle size="xs">{request_title}</RequestTitle>
+          <ProductionStatusIndicator>{requestStatus}</ProductionStatusIndicator>
         </ItemInfoRow>
         <ItemInfoRow>
-          <Username size="md">{username}</Username>
+          <Username size="md">{users[0].nickname}</Username>
         </ItemInfoRow>
         <ItemInfoRow>
-          <Reward size="sm">{reward}원</Reward>
-          <Paragraph size="xs">{requestedAt}</Paragraph>
+          <Reward size="sm">{request_reward.toLocaleString()}원</Reward>
+          <Paragraph size="xs">{requestedAt()}</Paragraph>
         </ItemInfoRow>
       </ItemInfoSection>
     </ItemContainer>

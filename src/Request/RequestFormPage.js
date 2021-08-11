@@ -6,21 +6,25 @@ import SectionHeader from '../components/SectionHeader';
 import { Paragraph, Title } from '../components/Text';
 import { Container } from '../components/Container';
 import { Select } from '../components/Select';
-import { useHistory } from 'react-router';
+import { useAuth } from '../contexts/AuthContextProvider';
 
 export default function RequestFormPage() {
   const [request, setRequest] = useState({
-    request_name: '',
+    request_title: '',
     request_content: '',
     request_duedate: '',
     request_reward: '',
-    bank: '',
-    account: '',
-    depositor: '',
+    refund_bank: '',
+    refund_account: '',
+    refund_depositor: '',
   });
   const [isCompleted, setIsCompleted] = useState(false);
+  const { history } = useAuth();
+
   function handleInputChange(e) {
     const { id, value } = e.target;
+    if (id === 'bank')
+      setRequest((prev) => ({ ...prev, [id]: findSelectId(value, banks) }));
     setRequest((prev) => ({ ...prev, [id]: value }));
   }
   function handleRequestButtonClick() {
@@ -35,7 +39,12 @@ export default function RequestFormPage() {
   return (
     <div>
       <Container>
-        <SectionHeader title="0000에 요청하기" mt={2.8} mb={3.6} />
+        <SectionHeader
+          title="0000에 요청하기"
+          mt={2.8}
+          mb={3.6}
+          handleGoBack={() => history.goBack()}
+        />
         <Image></Image>
         <NickName size="md" mt={0.4} mb={0.5}>
           민지킴이
@@ -51,7 +60,7 @@ export default function RequestFormPage() {
           placeholder="제목을 입력해주세요"
           id="request_name"
           onChange={handleInputChange}
-          value={request.request_name}
+          value={request.request_title}
         />
         <Title size="sm" mb={0.8}>
           내용
@@ -96,7 +105,7 @@ export default function RequestFormPage() {
         <Select
           id="bank"
           handleSelectChange={handleInputChange}
-          currentValue={request.bank}
+          currentValue={request.refund_bank}
           selectOptions={banks}
         />
         <Title size="sm" mb={0.8}>
@@ -107,7 +116,7 @@ export default function RequestFormPage() {
           placeholder="-를 포함하지 않고 작성해주세요"
           id="account"
           onChange={handleInputChange}
-          value={request.account}
+          value={request.refund_account}
         />
         <Title size="sm" mb={0.8}>
           입금자명
@@ -117,7 +126,7 @@ export default function RequestFormPage() {
           placeholder="회원님 명의로 된 계좌를 입력해주세요"
           id="depositor"
           onChange={handleInputChange}
-          value={request.depositor}
+          value={request.refund_depositor}
         />
       </Container>
       <Divider />
@@ -192,6 +201,7 @@ const RequestContent = styled.textarea`
   color: #292929;
   font-family: Pretendard;
   line-height: 21px;
+  font-size: 1.5rem;
   &:focus {
     outline: none;
     border: 1px solid #ed6565;
@@ -203,13 +213,18 @@ const RequestContent = styled.textarea`
     font-size: 1.5rem;
     line-height: 2.1rem;
     color: #94999e;
+  }
 `;
 const banks = [
-  '신한은행',
-  '카카오뱅크',
-  '농협',
-  '국민은행',
-  '우리은행',
-  '기업은행',
-  '하나은행',
+  ['SH', '신한은행'],
+  ['KA', '카카오뱅크'],
+  ['NH', '농협'],
+  ['KB', '국민은행'],
+  ['WR', '우리은행'],
+  ['IBK', '기업은행'],
+  ['HN', '하나은행'],
 ];
+function findSelectId(value, options) {
+  const key = options.filter((option) => option[1] === value);
+  return key[0][0];
+}
