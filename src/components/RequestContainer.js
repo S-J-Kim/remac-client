@@ -8,6 +8,7 @@ export default function RequestContainer({
   category,
   intro,
   handleSendButtonClick,
+  creatorId,
 }) {
   return (
     <Container>
@@ -23,7 +24,9 @@ export default function RequestContainer({
           <Intro size="md">{intro}</Intro>
         </InfoContainer>
       </SubContainer>
-      <SendButton onClick={handleSendButtonClick}>요청보내기</SendButton>
+      <SendButton id={creatorId} onClick={handleSendButtonClick}>
+        요청보내기
+      </SendButton>
     </Container>
   );
 }

@@ -4,16 +4,26 @@ import { Container } from '../components/Container';
 import RequestContainer from '../components/RequestContainer';
 import { Title } from '../components/Text';
 import { useAuth } from '../contexts/AuthContextProvider';
+import { Fetchers } from '../fetchers';
 
 export default function MainPage() {
   const { history } = useAuth();
   const [selected, setSelected] = useState('');
-  function handleSendButtonClick() {
-    history.push('/request/form');
+  const [creators, setCreators] = useState([]);
+  function handleSendButtonClick(e) {
+    history.push('/request/form', {
+      creatorId: e.target.id,
+      creatorName: e.target.parentElement.outerText.split('\n')[0],
+      category: e.target.parentElement.outerText.split('\n')[1],
+    });
   }
   function handleCategoryFiltering(e) {
     console.log(e);
   }
+  useEffect(() => {
+    Fetchers.getCreators().then((creators) => setCreators(creators));
+  }, []);
+
   return (
     <div>
       <MainImage
@@ -62,9 +72,18 @@ export default function MainPage() {
           category="동물"
           intro="강화도 보더콜리 보리의 우당탕탕 견생"
         />
-        <RequestContainer handleSendButtonClick={handleSendButtonClick} />
-        <RequestContainer handleSendButtonClick={handleSendButtonClick} />
-        <RequestContainer handleSendButtonClick={handleSendButtonClick} />
+        {creators.map((creator) => {
+          return (
+            <RequestContainer
+              handleSendButtonClick={handleSendButtonClick}
+              imageURL={creator.profile_image}
+              nickname={creator.nickname}
+              category={creator.channel_category}
+              intro={creator.channel_intro}
+              creatorId={creator.id}
+            />
+          );
+        })}
       </Container>
     </div>
   );

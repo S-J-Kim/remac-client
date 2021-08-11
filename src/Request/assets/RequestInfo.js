@@ -3,17 +3,8 @@ import { Title } from '../../components/Text';
 import styled from 'styled-components';
 import { colors } from '../../styles/theme';
 
-const RequestInfo = ({ request }) => {
-  const {
-    creatorName,
-    category,
-    requestTitle,
-    requestDeadline,
-    reward,
-    requestContent,
-  } = request;
-
-  return (
+const RequestInfo = ({ request, creatorName, category }) => {
+  return request ? (
     <Container>
       <ReceiptTitle size="sm">요청 정보</ReceiptTitle>
       <RequestInfoContainer>
@@ -24,13 +15,17 @@ const RequestInfo = ({ request }) => {
         <RequestInfoLabel size="sm-medium">리워드</RequestInfoLabel>
         <RequestInfoData size="sm">{creatorName}</RequestInfoData>
         <RequestInfoData size="sm">{category}</RequestInfoData>
-        <RequestInfoData size="sm">{requestTitle}</RequestInfoData>
-        <RequestInfoData size="sm">{requestDeadline}</RequestInfoData>
-        <RequestInfoReward size="sm">{reward}원</RequestInfoReward>
+        <RequestInfoData size="sm">{request.request_title}</RequestInfoData>
+        <RequestInfoData size="sm">{request.request_duedate}</RequestInfoData>
+        <RequestInfoReward size="sm">
+          {request.request_reward}원
+        </RequestInfoReward>
       </RequestInfoContainer>
       <ReceiptTitle size="sm">요청 내용</ReceiptTitle>
-      <RequestInfoContent>{requestContent}</RequestInfoContent>
+      <RequestInfoContent>{request.request_content}</RequestInfoContent>
     </Container>
+  ) : (
+    <></>
   );
 };
 
@@ -41,6 +36,7 @@ const Container = styled.div`
   width: 100%;
   padding: 1.8rem;
   margin: 5.3rem auto;
+  margin-bottom: 13rem;
 `;
 
 const ReceiptTitle = styled(Title)`
