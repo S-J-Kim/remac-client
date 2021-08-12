@@ -63,9 +63,15 @@ export default function LoginPage() {
         content="로그인"
         onClick={loginButtonClicked}
       />
-      <Button mb={2} content="회원가입" onClick={loginButtonClicked} />
+      <Button
+        mb={2}
+        content="회원가입"
+        onClick={() => history.push('/signup/requester')}
+      />
 
-      <CreatorJoinButton>크리에이터 회원가입</CreatorJoinButton>
+      <CreatorJoinButton onClick={() => history.push('/signup/creator')}>
+        크리에이터 회원가입
+      </CreatorJoinButton>
     </Container>
   );
 }
@@ -81,7 +87,7 @@ const InputName = styled.div`
   color: #292929;
   margin-bottom: 0.8rem;
 `;
-const CreatorJoinButton = styled.a`
+const CreatorJoinButton = styled.div`
   font-style: normal;
   font-weight: normal;
   font-size: 12px;

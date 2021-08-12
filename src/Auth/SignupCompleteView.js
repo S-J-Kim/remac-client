@@ -32,7 +32,7 @@ const SignupCompleteView = (props) => {
           구독자들에게 알려주세요!
         </SectionDesc>
       )}
-      <WelcomeImage src="" />
+      <Margin />
       <CreatedID size="xs" mb={1.5}>
         가입 아이디 : {account.userID}
       </CreatedID>
@@ -49,10 +49,8 @@ const SectionDesc = styled(Paragraph)`
   line-height: 2.4rem;
 `;
 
-const WelcomeImage = styled.img`
-  width: 100%;
-  height: 24.6rem;
-  margin: 2.4rem auto;
+const Margin = styled.div`
+  height: 21.4rem;
 `;
 
 const CreatedID = styled(Paragraph)`

@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import { Container } from '../components/Container';
 import SectionHeader from '../components/SectionHeader';
 import { Title, Paragraph } from '../components/Text';
-import axios from 'axios';
 import { useAuth } from '../contexts/AuthContextProvider';
 import RequestList from './RequestList';
 import { Fetchers } from '../fetchers/index';
@@ -20,7 +19,7 @@ const Mypage = (props) => {
     requests: [],
   });
 
-  const { authToken, history } = useAuth();
+  const { authToken, history, setAuthToken } = useAuth();
 
   useEffect(() => {
     Fetchers.getUserDetail({
@@ -72,6 +71,14 @@ const Mypage = (props) => {
         requests={userInfo.requests}
         username={userInfo.userNickname}
       />
+      <Logout
+        onClick={(e) => {
+          setAuthToken('');
+          history.push('/');
+        }}
+      >
+        로그아웃
+      </Logout>
     </Container>
   );
 };
@@ -126,5 +133,14 @@ const HorizontalDivider = styled.div`
   border-left: 1px solid #bbbbbb;
   margin: auto 1rem;
 `;
-
+const Logout = styled.div`
+  margin-top: 4rem;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 17px;
+  text-align: center;
+  text-decoration-line: underline;
+  color: ${(props) => props.theme.colors.gray};
+`;
 export default Mypage;

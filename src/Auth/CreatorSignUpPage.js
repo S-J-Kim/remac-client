@@ -32,8 +32,6 @@ export default function CreatorSignUpPage() {
     else {
       Fetchers.signupCreator({ param: joinData }).then((token) => {
         setAuthToken(token);
-        console.log('creator', token);
-
         history.push({
           pathname: '/signup/profile',
           state: {

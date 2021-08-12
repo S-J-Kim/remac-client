@@ -36,7 +36,7 @@ const getUserInformation = async ({ authToken }) => {
     'https://remac.co.kr/account/after_register/',
     config
   );
-  return response.data.nickname;
+  return response.data;
 };
 
 const getUserDetail = async (param) => {
