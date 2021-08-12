@@ -6,7 +6,7 @@ import { DateTime, Interval, TIME_24_SIMPLE } from 'luxon';
 import { useAuth } from '../contexts/AuthContextProvider';
 
 const RequestItem = ({ request, username }) => {
-  const { request_title, request_status, created, users, request_reward } =
+  const { id, request_title, request_status, created, users, request_reward } =
     request;
   const { history } = useAuth();
   const user = users.filter((item) => {
@@ -53,7 +53,7 @@ const RequestItem = ({ request, username }) => {
   };
 
   const handleRequestItemClicked = () => {
-    history.push('/request');
+    history.push(`/request/${id}`);
   };
 
   return (

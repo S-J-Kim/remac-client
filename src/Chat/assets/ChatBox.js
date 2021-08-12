@@ -2,6 +2,7 @@ import React, { useReducer, useState } from 'react';
 import styled from 'styled-components';
 
 import { Title } from '../../components/Text';
+import { useAuth } from '../../contexts/AuthContextProvider';
 import ChatItemButtons from './ChatItemButton';
 import UrlLink from './UrlLink';
 
@@ -19,6 +20,7 @@ const ChatItemText = styled(Title)`
 
 const ChatBox = (props) => {
   const { type, data } = props;
+  const { nickname } = useAuth();
   const [requestAction, setRequestAction] = useState(() => {
     switch (type) {
       case 'check-creator':
@@ -42,7 +44,7 @@ const ChatBox = (props) => {
       case 'check-creator':
         return (
           <>
-            {data.username}님, 요청이 도착했습니다!
+            {nickname}님, 요청이 도착했습니다!
             <br />
             지금 시청자가 원하는 영상도
             <br />
@@ -62,7 +64,7 @@ const ChatBox = (props) => {
       case 'done-requester':
         return (
           <>
-            {data.username}님,
+            {nickname}님,
             <br />
             요청하신 영상 제작이 완료되었어요!
             <br />

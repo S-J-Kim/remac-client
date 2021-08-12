@@ -10,14 +10,13 @@ import { useAuth } from '../contexts/AuthContextProvider';
 import Chattings from './Chattings';
 
 const RequestChat = (props) => {
-  // const { pk } = useParams();
+  const { pk } = useParams();
   const { authToken } = useAuth();
-  const location = useLocation();
-  const [chatData, setChatData] = useState();
+  const [chatData, setChatData] = useState('');
 
   useEffect(() => {
     axios
-      .get(`https://remac.co.kr/dialog/20`, {
+      .get(`https://remac.co.kr/dialog/${pk}/`, {
         headers: { Authorization: `Bearer ${authToken.access}` },
         // headers: {
         //   Authorization: `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjI4ODcwNzcwLCJqdGkiOiI5MWQ4ZmVjOTIxM2E0YzZkYThmYzQ3ZmU1NGEwNTIwOSIsInVzZXJfaWQiOjE5LCJ1c2VybmFtZSI6ImdyZWZlciJ9.z4DsodvCPPNM8ACBvT9Za1YOkawJBkvLI7sScJqK06c`,
@@ -31,7 +30,7 @@ const RequestChat = (props) => {
 
   return (
     <>
-      <ChattingHeader chatData={chatData} />
+      {chatData && <ChattingHeader chatData={chatData} />}
       {chatData && <Chattings data={chatData} />}
     </>
   );

@@ -7,7 +7,9 @@ export default function ChattingHeader({ chatData }) {
   const [isOpened, setIsOpened] = useState(false);
   const { userId } = useAuth();
 
-  const otherUser = chatData.users.filter((user) => user.id !== userId)[0];
+  const otherUser = chatData.users.filter((user) => {
+    return user.id !== userId;
+  })[0];
   const [requestStatus] = useState(() => {
     switch (chatData.request_status) {
       case 'request':
@@ -27,7 +29,9 @@ export default function ChattingHeader({ chatData }) {
       <UserHeader>
         <img src={process.env.PUBLIC_URL + '/backIcon.svg'} />
         <UserInfoWrapper>
-          <UserNickName size="md">{otherUser.nickname}</UserNickName>
+          {otherUser && (
+            <UserNickName size="md">{otherUser.nickname}</UserNickName>
+          )}
           <ProductionStatusIndicator>{requestStatus}</ProductionStatusIndicator>
         </UserInfoWrapper>
       </UserHeader>

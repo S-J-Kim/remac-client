@@ -17,7 +17,7 @@ import { DateTime } from 'luxon';
 */
 
 const ChatItem = (props) => {
-  const { type, data } = props;
+  const { type, data, onClick, onChange } = props;
   return (
     <>
       <DateDivider messageSendAt={data?.sendTime.toISO()} />
@@ -28,7 +28,9 @@ const ChatItem = (props) => {
           <ChatBoxContainer>
             <ChatBox
               type={type}
-              data={{ username: '쥬쥬공쥬짱', link: 'https://www.naver.com' }}
+              data={data}
+              onClick={onClick}
+              onChange={onChange}
             />
             <MessageSendAt size="xs">
               {data?.sendTime.toFormat('t')}
