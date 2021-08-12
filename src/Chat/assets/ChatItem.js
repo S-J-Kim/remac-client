@@ -20,7 +20,7 @@ const ChatItem = (props) => {
   const { type, data } = props;
   return (
     <>
-      <DateDivider messageSendAt={DateTime.now().toISO()} />
+      <DateDivider messageSendAt={data?.sendTime.toISO()} />
       {type !== 'check-creator' && <StateAlertBox type={type} />}
       {type !== 'done-creator' && (
         <ChatItemContainer>
@@ -30,7 +30,9 @@ const ChatItem = (props) => {
               type={type}
               data={{ username: '쥬쥬공쥬짱', link: 'https://www.naver.com' }}
             />
-            <MessageSendAt size="xs">{data?.sendTime}</MessageSendAt>
+            <MessageSendAt size="xs">
+              {data?.sendTime.toFormat('t')}
+            </MessageSendAt>
           </ChatBoxContainer>
         </ChatItemContainer>
       )}

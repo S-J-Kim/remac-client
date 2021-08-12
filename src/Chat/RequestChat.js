@@ -4,7 +4,7 @@ import ChattingHeader from '../components/ChattingHeader';
 import ChatItem from './assets/ChatItem';
 import { Container } from '../components/Container';
 import { DateTime } from 'luxon';
-import { useParams } from 'react-router-dom';
+import { useParams, useLocation } from 'react-router-dom';
 import axios from 'axios';
 import { useAuth } from '../contexts/AuthContextProvider';
 import Chattings from './Chattings';
@@ -12,6 +12,7 @@ import Chattings from './Chattings';
 const RequestChat = (props) => {
   // const { pk } = useParams();
   const { authToken } = useAuth();
+  const location = useLocation();
   const [chatData, setChatData] = useState();
 
   useEffect(() => {
@@ -23,7 +24,8 @@ const RequestChat = (props) => {
         },
       })
       .then((res) => {
-        setChatData(res);
+        console.log(res);
+        setChatData(res.data);
       });
   }, []);
 
