@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import RequestItem from './RequestItem';
 
 const RequestList = (props) => {
-  const { requests } = props;
+  const { requests, username } = props;
   // const [requests, setRequests] = useState([
   //   {
   //     profileImage: '',
@@ -20,7 +20,7 @@ const RequestList = (props) => {
         요청 목록 <RequestCounter>{requests.length}</RequestCounter>
       </SectionTitle>
       {requests.map((item) => {
-        return <RequestItem request={item} />;
+        return <RequestItem request={item} username={username} />;
       })}
     </RequestListSection>
   );
