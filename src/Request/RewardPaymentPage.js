@@ -15,7 +15,7 @@ export default function RewardPaymentPage() {
   const { request, creatorName } = location.state;
   useEffect(() => {
     Fetchers.getUserInformation({ authToken: authToken.access }).then((res) =>
-      setUserNickName(res)
+      setUserNickName(res.nickname)
     );
   }, []);
   function handleOkButtonClicked() {

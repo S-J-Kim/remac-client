@@ -7,7 +7,8 @@ import { useAuth } from '../contexts/AuthContextProvider';
 import { Fetchers } from '../fetchers';
 
 export default function MainPage() {
-  const { authToken, history } = useAuth();
+  const { authToken, history, setNickname, setUserId, setIsCreator } =
+    useAuth();
   const [selected, setSelected] = useState('');
   const [creators, setCreators] = useState([]);
   const [filteredCreators, setFilteredCreators] = useState([]);
@@ -38,6 +39,19 @@ export default function MainPage() {
   shuffle(creators);
   useEffect(() => {
     Fetchers.getCreators().then((creators) => setCreators(creators));
+    if (authToken) {
+      Fetchers.getUserInformation({ authToken: authToken.access }).then(
+        (userData) => {
+          setNickname(userData.nickname);
+          setUserId(userData.id);
+          setIsCreator(userData.is_creator);
+        }
+      );
+    } else {
+      setNickname('');
+      setUserId();
+      setIsCreator(false);
+    }
   }, []);
 
   useEffect(() => {

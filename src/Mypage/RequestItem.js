@@ -3,11 +3,12 @@ import styled from 'styled-components';
 import { ProductionStatusIndicator } from '../components/Buttons';
 import { Title, Paragraph } from '../components/Text';
 import { DateTime, Interval, TIME_24_SIMPLE } from 'luxon';
+import { useAuth } from '../contexts/AuthContextProvider';
 
 const RequestItem = ({ request, username }) => {
   const { request_title, request_status, created, users, request_reward } =
     request;
-
+  const { history } = useAuth();
   const user = users.filter((item) => {
     console.log(users, username);
     return item.nickname !== username;
@@ -51,8 +52,12 @@ const RequestItem = ({ request, username }) => {
     return `${month}월 ${day()}일 ${hourMinutes}`;
   };
 
+  const handleRequestItemClicked = () => {
+    history.push('/chat/url/넣어야함 ㅎㅎㅎ', {});
+  };
+
   return (
-    <ItemContainer>
+    <ItemContainer onClick={handleRequestItemClicked}>
       <ProfileImage src={user[0].profile_image} />
       <ItemInfoSection>
         <ItemInfoRow>
