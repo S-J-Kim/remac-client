@@ -31,8 +31,8 @@ const RequestChat = (props) => {
 
   return (
     <>
-      <ChattingHeader />
-      <Chattings data={chatData} isCreator={true} />
+      <ChattingHeader chatData={chatData} />
+      <Chattings data={chatData} />
     </>
   );
 };
