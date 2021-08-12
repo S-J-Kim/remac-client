@@ -1,19 +1,40 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import ChatBox from './ChatBox';
 import ProfileImage from './ChatProfileImage';
 import { Paragraph } from '../../components/Text';
+import DateDivider from './DateDivider';
+import StateAlertBox from './StateAlertBox';
+import { DateTime } from 'luxon';
+
+/*
+  ChatItem이 가질 수 있는 상태 5가지
+  - confirm-requester: 크리에이터가 요청 수락한 경우 리퀘스터에게 보여주는 메세지
+  - done-requester: 크리에이터가 영상 제작 완료한 경우 리퀘스터에게 보여주는 메세지
+  - check-creator: 리퀘스트가 막 도착한 경우 크리에이터에게 보여주는 메세지
+  - confirm-creator: 리퀘스트를 수락한 경우 크리에이터에게 보여주는 메세지
+  - done-creator: 크리에이터가 URL을 입력한 경우 보여주는 메세지
+*/
 
 const ChatItem = (props) => {
   const { type, data } = props;
   return (
-    <ChatItemContainer>
-      <ProfileImage src={data?.profileImage} />
-      <ChatBoxContainer>
-        <ChatBox type={type} link={data?.videoURL} />
-        <MessageSendAt size="xs">{data.sendTime}</MessageSendAt>
-      </ChatBoxContainer>
-    </ChatItemContainer>
+    <>
+      <DateDivider messageSendAt={DateTime.now().toISO()} />
+      {type !== 'check-creator' && <StateAlertBox type={type} />}
+      {type !== 'done-creator' && (
+        <ChatItemContainer>
+          <ProfileImage src={data?.profileImage} />
+          <ChatBoxContainer>
+            <ChatBox
+              type={type}
+              data={{ username: '쥬쥬공쥬짱', link: 'https://www.naver.com' }}
+            />
+            <MessageSendAt size="xs">{data?.sendTime}</MessageSendAt>
+          </ChatBoxContainer>
+        </ChatItemContainer>
+      )}
+    </>
   );
 };
 

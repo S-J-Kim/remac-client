@@ -68,7 +68,10 @@ const Mypage = (props) => {
           </ChannelDiscriptionContainer>
         )}
       </UserInfoSection>
-      <RequestList requests={userInfo.requests} />
+      <RequestList
+        requests={userInfo.requests}
+        username={userInfo.userNickname}
+      />
     </Container>
   );
 };
