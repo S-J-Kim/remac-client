@@ -31,7 +31,7 @@ const RequestChat = (props) => {
 
   return (
     <>
-      <ChattingHeader />
+      <ChattingHeader chatData={chatData} />
       {chatData && <Chattings data={chatData} />}
     </>
   );
