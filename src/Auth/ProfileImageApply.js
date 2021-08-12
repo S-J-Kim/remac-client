@@ -44,7 +44,7 @@ const ProfileImageApply = (props) => {
       method: 'patch',
       url: 'https://remac.co.kr/api/profileimage/',
       headers: {
-        Authorization: `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjI4NzgzNjg1LCJqdGkiOiIzMzFlZjRiMTVlYjI0YWVlOWNhODc1M2QyMTBmZGVlOSIsInVzZXJfaWQiOjE5fQ.FtMddjWoVxTiOUPNmu0TqpVECtkS0eh2ZEzkp9iwJXo`,
+        Authorization: `Bearer ${authToken.access}`,
         'Content-Type': 'application/json',
       },
       data: formData,
