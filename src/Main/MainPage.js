@@ -11,13 +11,15 @@ export default function MainPage() {
   const [selected, setSelected] = useState('');
 
   const [creators, setCreators] = useState([]);
-  function handleSendButtonClick(e) {
-    authToken ? : history.push('/request/form', {
-      creatorId: e.target.id,
-      creatorName: e.target.parentElement.outerText.split('\n')[0],
-      category: e.target.parentElement.outerText.split('\n')[1],
-    }) : history.push('/login');
-
+  function handleSendButtonClick(creatorInfo) {
+    authToken
+      ? history.push('/request/form', {
+          creatorId: creatorInfo.id,
+          creatorName: creatorInfo.nickname,
+          category: creatorInfo.channel_category,
+          profileImage: creatorInfo.profile_image,
+        })
+      : history.push('/login');
   }
   function handleCategoryFiltering(e) {
     console.log(e);
@@ -77,7 +79,7 @@ export default function MainPage() {
         {creators.map((creator) => {
           return (
             <RequestContainer
-              handleSendButtonClick={handleSendButtonClick}
+              handleSendButtonClick={() => handleSendButtonClick(creator)}
               imageURL={creator.profile_image}
               nickname={creator.nickname}
               category={creator.channel_category}

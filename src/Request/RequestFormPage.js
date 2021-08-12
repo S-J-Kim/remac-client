@@ -11,7 +11,7 @@ import { useLocation } from 'react-router';
 
 export default function RequestFormPage() {
   const location = useLocation();
-  const { creatorId, creatorName, category } = location.state;
+  const { creatorId, creatorName, category, profileImage } = location.state;
   const [request, setRequest] = useState({
     users: [creatorId],
     request_title: '',
@@ -54,17 +54,19 @@ export default function RequestFormPage() {
     <div>
       <Container>
         <SectionHeader
-          title="0000에 요청하기"
+          title={`${creatorName}에게 요청하기`}
           mt={2.8}
           mb={3.6}
           handleGoBack={() => history.goBack()}
         />
-        <Image></Image>
+        <ImageContainer>
+          <Image src={profileImage} />
+        </ImageContainer>
         <NickName size="md" mt={0.4} mb={0.5}>
-          민지킴이
+          {creatorName}
         </NickName>
         <Category size="xs" mb={2.2}>
-          헬스
+          {category}
         </Category>
         <Title size="sm" mb={0.8}>
           제목
@@ -181,14 +183,19 @@ export default function RequestFormPage() {
 const NickName = styled(Title)`
   text-align: center;
 `;
-const Image = styled.div`
+
+const ImageContainer = styled.div`
+  display: flex;
+  justify-content: center;
+`;
+
+const Image = styled.img`
   width: 86px;
   height: 86px;
   background: rgba(229, 229, 229, 0.29);
   border: 1px solid #d2d6da;
   border-radius: 50px;
   box-sizing: border-box;
-  margin-left: 12.85rem;
 `;
 const Category = styled(Paragraph)`
   text-align: center;

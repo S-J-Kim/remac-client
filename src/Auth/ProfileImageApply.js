@@ -95,7 +95,18 @@ const ProfileImageApply = (props) => {
   });
 
   const [skipButton, setSkipButton] = useState(
-    <SkipButton content="건너뛰기" />
+    <SkipButton
+      content="건너뛰기"
+      onClick={() => {
+        history.push({
+          pathname: '/signup/complete',
+          state: {
+            username: location.state.username,
+            nickname: location.state.nickname,
+          },
+        });
+      }}
+    />
   );
 
   return (

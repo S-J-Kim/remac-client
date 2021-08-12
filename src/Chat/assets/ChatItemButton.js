@@ -31,7 +31,7 @@ const ChatItemButtons = (props) => {
   };
 
   useEffect(() => {
-    videoURL ? setInputStatus('activate') : setInputStatus('deactivate');
+    setInputStatus(videoURL ? 'activate' : 'deactivate');
   }, [videoURL]);
 
   return type === 'check' ? (
