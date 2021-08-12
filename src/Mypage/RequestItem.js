@@ -53,7 +53,7 @@ const RequestItem = ({ request, username }) => {
   };
 
   const handleRequestItemClicked = () => {
-    history.push('/chat/url/넣어야함 ㅎㅎㅎ', {});
+    history.push('/request');
   };
 
   return (

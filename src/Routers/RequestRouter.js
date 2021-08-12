@@ -15,7 +15,7 @@ const RequestRouter = (props) => {
         render={() => <RewardPaymentPage />}
       />
       <Route path={match.url + '/check'} render={() => <RequestCheck />} />
-      <Route path={match.url} exact render={() => <RequestChat />} />
+      <Route path={match.url + '/'} exact render={() => <RequestChat />} />
     </>
   );
 };

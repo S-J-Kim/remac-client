@@ -18,10 +18,10 @@ const RequestChat = (props) => {
   useEffect(() => {
     axios
       .get(`https://remac.co.kr/dialog/20`, {
-        // headers: { Authorization: `Bearer ${authToken.access}` },
-        headers: {
-          Authorization: `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjI4ODcwNzcwLCJqdGkiOiI5MWQ4ZmVjOTIxM2E0YzZkYThmYzQ3ZmU1NGEwNTIwOSIsInVzZXJfaWQiOjE5LCJ1c2VybmFtZSI6ImdyZWZlciJ9.z4DsodvCPPNM8ACBvT9Za1YOkawJBkvLI7sScJqK06c`,
-        },
+        headers: { Authorization: `Bearer ${authToken.access}` },
+        // headers: {
+        //   Authorization: `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjI4ODcwNzcwLCJqdGkiOiI5MWQ4ZmVjOTIxM2E0YzZkYThmYzQ3ZmU1NGEwNTIwOSIsInVzZXJfaWQiOjE5LCJ1c2VybmFtZSI6ImdyZWZlciJ9.z4DsodvCPPNM8ACBvT9Za1YOkawJBkvLI7sScJqK06c`,
+        // },
       })
       .then((res) => {
         console.log(res);
@@ -32,7 +32,7 @@ const RequestChat = (props) => {
   return (
     <>
       <ChattingHeader />
-      <Chattings data={chatData} isCreator={true} />
+      {chatData && <Chattings data={chatData} />}
     </>
   );
 };
