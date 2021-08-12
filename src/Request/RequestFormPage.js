@@ -7,9 +7,13 @@ import { Paragraph, Title } from '../components/Text';
 import { Container } from '../components/Container';
 import { Select } from '../components/Select';
 import { useAuth } from '../contexts/AuthContextProvider';
+import { useLocation } from 'react-router';
 
 export default function RequestFormPage() {
+  const location = useLocation();
+  const { creatorId, creatorName, category, profileImage } = location.state;
   const [request, setRequest] = useState({
+    users: [creatorId],
     request_title: '',
     request_content: '',
     request_duedate: '',
@@ -20,15 +24,25 @@ export default function RequestFormPage() {
   });
   const [isCompleted, setIsCompleted] = useState(false);
   const { history } = useAuth();
-
+  function findSelectId(value, options) {
+    const key = options.filter((option) => option[1] === value);
+    return key[0][0];
+  }
   function handleInputChange(e) {
     const { id, value } = e.target;
-    if (id === 'bank')
-      setRequest((prev) => ({ ...prev, [id]: findSelectId(value, banks) }));
-    setRequest((prev) => ({ ...prev, [id]: value }));
+    if (id === 'refund_bank')
+      setRequest((prev) => ({
+        ...prev,
+        refund_bank: findSelectId(value, banks),
+      }));
+    else setRequest((prev) => ({ ...prev, [id]: value }));
   }
   function handleRequestButtonClick() {
-    //send post request
+    history.push('/request/check', {
+      request: request,
+      creatorName: creatorName,
+      category: category,
+    });
   }
   useEffect(() => {
     setIsCompleted(true);
@@ -40,17 +54,19 @@ export default function RequestFormPage() {
     <div>
       <Container>
         <SectionHeader
-          title="0000에 요청하기"
+          title={`${creatorName}에게 요청하기`}
           mt={2.8}
           mb={3.6}
           handleGoBack={() => history.goBack()}
         />
-        <Image></Image>
+        <ImageContainer>
+          <Image src={profileImage} />
+        </ImageContainer>
         <NickName size="md" mt={0.4} mb={0.5}>
-          민지킴이
+          {creatorName}
         </NickName>
         <Category size="xs" mb={2.2}>
-          헬스
+          {category}
         </Category>
         <Title size="sm" mb={0.8}>
           제목
@@ -58,7 +74,7 @@ export default function RequestFormPage() {
         <Input
           mb={1.4}
           placeholder="제목을 입력해주세요"
-          id="request_name"
+          id="request_title"
           onChange={handleInputChange}
           value={request.request_title}
         />
@@ -103,7 +119,7 @@ export default function RequestFormPage() {
           은행
         </Title>
         <Select
-          id="bank"
+          id="refund_bank"
           handleSelectChange={handleInputChange}
           currentValue={request.refund_bank}
           selectOptions={banks}
@@ -114,7 +130,7 @@ export default function RequestFormPage() {
         <Input
           mb={1.4}
           placeholder="-를 포함하지 않고 작성해주세요"
-          id="account"
+          id="refund_account"
           onChange={handleInputChange}
           value={request.refund_account}
         />
@@ -124,7 +140,7 @@ export default function RequestFormPage() {
         <Input
           mb={2.9}
           placeholder="회원님 명의로 된 계좌를 입력해주세요"
-          id="depositor"
+          id="refund_depositor"
           onChange={handleInputChange}
           value={request.refund_depositor}
         />
@@ -167,14 +183,19 @@ export default function RequestFormPage() {
 const NickName = styled(Title)`
   text-align: center;
 `;
-const Image = styled.div`
+
+const ImageContainer = styled.div`
+  display: flex;
+  justify-content: center;
+`;
+
+const Image = styled.img`
   width: 86px;
   height: 86px;
   background: rgba(229, 229, 229, 0.29);
   border: 1px solid #d2d6da;
   border-radius: 50px;
   box-sizing: border-box;
-  margin-left: 12.85rem;
 `;
 const Category = styled(Paragraph)`
   text-align: center;
@@ -226,7 +247,3 @@ const banks = [
   ['IBK', '기업은행'],
   ['HN', '하나은행'],
 ];
-function findSelectId(value, options) {
-  const key = options.filter((option) => option[1] === value);
-  return key[0][0];
-}

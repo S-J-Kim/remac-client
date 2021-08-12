@@ -44,12 +44,10 @@ const ProfileImageApply = (props) => {
       method: 'patch',
       url: 'https://remac.co.kr/api/profileimage/',
       headers: {
-        Authorization: `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTYyODg1NzYzOCwianRpIjoiNjdjNzI4MDM0ZmEwNDRiZjhlMjFlYjJhZmJhYjJmZGUiLCJ1c2VyX2lkIjoxMCwidXNlcm5hbWUiOiJxd2VycXdlciJ9.TNv0ICy4yhWqepF2uhBkauTnyX80_Erh1Fll4U_z4CE`,
+        Authorization: `Bearer ${authToken.access}`,
         'Content-Type': 'application/json',
       },
-      data: {
-        profile_image: byteString,
-      },
+      data: formData,
     };
     axios(config).then((res) => console.log(res));
   };
@@ -60,7 +58,13 @@ const ProfileImageApply = (props) => {
 
   const handleCompleteButtonClick = () => {
     uploadProfileImage(); // Post user's profile image to server
-    history.push('/signup/complete');
+    history.push({
+      pathname: '/signup/complete',
+      state: {
+        username: location.state.username,
+        nickname: location.state.nickname,
+      },
+    });
   };
 
   const handleImageUpload = (e) => {
@@ -91,7 +95,18 @@ const ProfileImageApply = (props) => {
   });
 
   const [skipButton, setSkipButton] = useState(
-    <SkipButton content="건너뛰기" />
+    <SkipButton
+      content="건너뛰기"
+      onClick={() => {
+        history.push({
+          pathname: '/signup/complete',
+          state: {
+            username: location.state.username,
+            nickname: location.state.nickname,
+          },
+        });
+      }}
+    />
   );
 
   return (
@@ -104,8 +119,8 @@ const ProfileImageApply = (props) => {
       />
       <ContentContainer>
         <ProfileImage src={profileImage} />
-        <Title size="md">리퀘스터이름명</Title>
-        <Paragraph size="sm" mt={8} mb={11.2}>
+        <Title size="md">{location.state?.nickname}</Title>
+        <Paragraph size="sm" mt={8} mb={1.12}>
           회원님을 대표하는 사진을 등록해주세요!
         </Paragraph>
         <Button type="activate" {...buttonAttribute} />

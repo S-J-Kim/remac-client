@@ -4,13 +4,15 @@ import { Title, Paragraph } from '../components/Text';
 import Button from '../components/Buttons';
 import { Container } from '../components/Container';
 import { useAuth } from '../contexts/AuthContextProvider';
+import { useLocation } from 'react-router-dom';
 
 const SignupCompleteView = (props) => {
-  const [account] = useState({
-    userID: 'testid1234',
-    nickname: '리퀘공쥬쥬서영',
-  });
   const { history } = useAuth();
+  const location = useLocation();
+  const [account] = useState({
+    userID: location.state?.username,
+    nickname: location.state?.nickname,
+  });
 
   return (
     <Container>
@@ -24,9 +26,13 @@ const SignupCompleteView = (props) => {
           REMAC에서 바로 요청할 수 있어요.
         </SectionDesc>
       ) : (
-        <SectionDesc size="lg"></SectionDesc>
+        <SectionDesc size="lg">
+          Remac과 함께한다는 사실을
+          <br />
+          구독자들에게 알려주세요!
+        </SectionDesc>
       )}
-      <WelcomeImage src="" />
+      <Margin />
       <CreatedID size="xs" mb={1.5}>
         가입 아이디 : {account.userID}
       </CreatedID>
@@ -43,10 +49,8 @@ const SectionDesc = styled(Paragraph)`
   line-height: 2.4rem;
 `;
 
-const WelcomeImage = styled.img`
-  width: 100%;
-  height: 24.6rem;
-  margin: 2.4rem auto;
+const Margin = styled.div`
+  height: 21.4rem;
 `;
 
 const CreatedID = styled(Paragraph)`

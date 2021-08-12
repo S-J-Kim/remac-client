@@ -8,7 +8,15 @@ export default function RequestContainer({
   category,
   intro,
   handleSendButtonClick,
+  creatorId,
 }) {
+  const categories = {
+    food: '푸드',
+    game: '게임',
+    music: '음악',
+    knowledge: '학습',
+    review: '리뷰',
+  };
   return (
     <Container>
       <SubContainer>
@@ -18,12 +26,14 @@ export default function RequestContainer({
             {nickname}
           </Title>
           <Paragraph size="sm" mb={0.3}>
-            {category}
+            {categories[category]}
           </Paragraph>
           <Intro size="md">{intro}</Intro>
         </InfoContainer>
       </SubContainer>
-      <SendButton onClick={handleSendButtonClick}>요청보내기</SendButton>
+      <SendButton id={creatorId} onClick={handleSendButtonClick}>
+        요청보내기
+      </SendButton>
     </Container>
   );
 }

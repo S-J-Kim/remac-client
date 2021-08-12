@@ -17,13 +17,12 @@ const Receipt = (props) => {
           입금 금액
         </Labels>
         <Contents size="sm">
-          2021.08.08 23:59{date}
+          {date}
           <br />
-          리마크 은행{bank}
+          {bank}
+          <br />1{account}
           <br />
-          110-486-123456{account}
-          <br />
-          <Price>7,000원{price}</Price>
+          <Price>{price}원</Price>
         </Contents>
       </ContentContainer>
     </Container>

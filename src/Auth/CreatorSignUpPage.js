@@ -32,8 +32,6 @@ export default function CreatorSignUpPage() {
     else {
       Fetchers.signupCreator({ param: joinData }).then((token) => {
         setAuthToken(token);
-        console.log('creator', token);
-
         history.push({
           pathname: '/signup/profile',
           state: {
@@ -50,7 +48,6 @@ export default function CreatorSignUpPage() {
     return key[0][0];
   }
   function handleInputChange(e, inputID) {
-    console.log(e.target.id);
     setEventFlag(true);
     if (inputID === 0)
       setJoinData((prevData) => ({ ...prevData, username: e.target.value }));
