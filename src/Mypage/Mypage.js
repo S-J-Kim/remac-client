@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import { Container } from '../components/Container';
 import SectionHeader from '../components/SectionHeader';
 import { Title, Paragraph } from '../components/Text';
-import axios from 'axios';
 import { useAuth } from '../contexts/AuthContextProvider';
 import RequestList from './RequestList';
 import { Fetchers } from '../fetchers/index';
@@ -68,7 +67,10 @@ const Mypage = (props) => {
           </ChannelDiscriptionContainer>
         )}
       </UserInfoSection>
-      <RequestList requests={userInfo.requests} />
+      <RequestList
+        requests={userInfo.requests}
+        username={userInfo.userNickname}
+      />
       <Logout
         onClick={(e) => {
           setAuthToken('');
