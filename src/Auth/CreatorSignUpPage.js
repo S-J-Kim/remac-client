@@ -88,6 +88,9 @@ export default function CreatorSignUpPage() {
     }
     setEventFlag(false);
   }, [eventFlag]);
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   return (
     <MainContainer>
       <SubContainer>

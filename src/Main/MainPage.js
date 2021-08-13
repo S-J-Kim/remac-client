@@ -38,6 +38,7 @@ export default function MainPage() {
   }
   shuffle(creators);
   useEffect(() => {
+    window.scrollTo(0, 0);
     Fetchers.getCreators().then((creators) => setCreators(creators));
     if (authToken) {
       Fetchers.getUserInformation({ authToken: authToken.access }).then(

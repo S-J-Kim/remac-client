@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { Title, Paragraph } from '../components/Text';
 import Button from '../components/Buttons';
@@ -13,7 +13,9 @@ const SignupCompleteView = (props) => {
     userID: location.state?.username,
     nickname: location.state?.nickname,
   });
-
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   return (
     <Container>
       <Title size="lg" mt={7.8}>

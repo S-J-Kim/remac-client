@@ -1,7 +1,6 @@
 import React from 'react';
 import { Title } from '../../components/Text';
 import styled from 'styled-components';
-import { colors } from '../../styles/theme';
 
 const RequestInfo = ({ request, creatorName, category }) => {
   return request ? (

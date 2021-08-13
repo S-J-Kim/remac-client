@@ -28,7 +28,9 @@ export default function LoginPage() {
       history.push('/');
     });
   }
-
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   useEffect(() => {
     if (username && password) setButtonType('activate');
     else setButtonType('deactivate');

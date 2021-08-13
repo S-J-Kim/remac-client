@@ -1,5 +1,3 @@
-import { css } from 'styled-components';
-
 export const colors = {
   red: '#E52323',
   pink: '#ED6565',

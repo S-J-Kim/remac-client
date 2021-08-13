@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
 import { Container } from '../components/Container';
 import SectionHeader from '../components/SectionHeader';
-import { Paragraph, Title } from '../components/Text';
+import { Paragraph } from '../components/Text';
 import styled from 'styled-components';
 import RequestInfo from './assets/RequestInfo';
 import Button from '../components/Buttons';
@@ -25,7 +25,9 @@ const RequestCheck = (props) => {
       });
     });
   }
-
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   return (
     <Container>
       <SectionHeader title="요청 확인" handleGoBack={() => history.goBack()} />
