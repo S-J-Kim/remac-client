@@ -15,7 +15,7 @@ const Chattings = ({ data }) => {
       method: 'patch',
       url: `https://remac.co.kr/dialog/${id}`,
       headers: {
-        Authorization: `Bearer ${authToken.access}`,
+        Authorization: `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjI4OTE2MzgxLCJqdGkiOiJjYjY1MTA0NzViNjk0ZDM2YTk5NTRlMTViYzBjNGZlNyIsInVzZXJfaWQiOjIxLCJ1c2VybmFtZSI6ImtpbWJsdWUifQ.a9yU2zF4fAq8wLpcQU009fDHLIa3t4j45L8q-gRjMhI`,
         'Content-Type': 'application/json',
       },
       data: {

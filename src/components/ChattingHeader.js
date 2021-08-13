@@ -5,7 +5,7 @@ import { ProductionStatusIndicator } from '../components/Buttons';
 import { useAuth } from '../contexts/AuthContextProvider';
 export default function ChattingHeader({ chatData }) {
   const [isOpened, setIsOpened] = useState(false);
-  const { userId } = useAuth();
+  const { userId, history } = useAuth();
 
   const otherUser = chatData.users.filter((user) => {
     return user.id !== userId;
@@ -27,13 +27,17 @@ export default function ChattingHeader({ chatData }) {
   return (
     <>
       <UserHeader>
-        <img src={process.env.PUBLIC_URL + '/backIcon.svg'} />
+        <img
+          src={process.env.PUBLIC_URL + '/backIcon.svg'}
+          onClick={() => history.goBack()}
+        />
         <UserInfoWrapper>
           {otherUser && (
             <UserNickName size="md">{otherUser.nickname}</UserNickName>
           )}
           <ProductionStatusIndicator>{requestStatus}</ProductionStatusIndicator>
         </UserInfoWrapper>
+        <div></div>
       </UserHeader>
       <RequestWrapper onClick={() => setIsOpened(!isOpened)}>
         <RequestOpenCloseWrapper>
@@ -58,7 +62,8 @@ const UserHeader = styled.div`
   border-bottom: 0.1rem solid;
   border-color: ${(props) => props.theme.colors.lightgray};
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
+  padding: 0 1.6rem;
 `;
 const UserInfoWrapper = styled.div`
   display: flex;

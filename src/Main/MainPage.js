@@ -64,7 +64,7 @@ export default function MainPage() {
   return (
     <div>
       <MainImage
-        src={process.env.PUBLIC_URL + '/banner.svg'}
+        src={process.env.PUBLIC_URL + '/remacmainbanner.png'}
         onClick={() => history.push('/signup/creator')}
       />
       <Container>
@@ -148,6 +148,7 @@ const MainImage = styled.img`
   margin-bottom: 1.6rem;
   background-color: #123412;
   object-fit: cover;
+  -webkit-perspective: 1;
 `;
 const CategoryContainer = styled.div`
   display: flex;
