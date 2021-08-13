@@ -45,6 +45,9 @@ export default function RequestFormPage() {
     });
   }
   useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+  useEffect(() => {
     setIsCompleted(true);
     for (var key in request) {
       if (request[key] === '') setIsCompleted(false);

@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import Header from './components/Header';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router } from 'react-router-dom';
 import { createGlobalStyle, ThemeProvider } from 'styled-components';
 import { theme } from './styles/theme';
 import { AuthContextProvider } from './contexts/AuthContextProvider';

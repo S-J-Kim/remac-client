@@ -22,6 +22,7 @@ const Mypage = (props) => {
   const { authToken, history, setAuthToken } = useAuth();
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     Fetchers.getUserDetail({
       headers: {
         Authorization: `Bearer ${authToken.access}`,

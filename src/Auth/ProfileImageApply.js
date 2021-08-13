@@ -7,7 +7,6 @@ import { Title, Paragraph } from '../components/Text';
 import { Container } from '../components/Container';
 import { useLocation } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContextProvider';
-import { Fetchers } from '../fetchers';
 
 const ProfileImageApply = (props) => {
   const [profileImage, setProfileImage] = useState();

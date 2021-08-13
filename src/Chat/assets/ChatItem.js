@@ -1,11 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import ChatBox from './ChatBox';
 import ProfileImage from './ChatProfileImage';
 import { Paragraph } from '../../components/Text';
 import DateDivider from './DateDivider';
 import StateAlertBox from './StateAlertBox';
-import { DateTime } from 'luxon';
 
 /*
   ChatItem이 가질 수 있는 상태 5가지

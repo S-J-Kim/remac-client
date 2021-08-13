@@ -1,10 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import styled from 'styled-components';
 import ChattingHeader from '../components/ChattingHeader';
-import ChatItem from './assets/ChatItem';
-import { Container } from '../components/Container';
-import { DateTime } from 'luxon';
-import { useParams, useLocation } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import { useAuth } from '../contexts/AuthContextProvider';
 import Chattings from './Chattings';
@@ -15,6 +11,7 @@ const RequestChat = (props) => {
   const [chatData, setChatData] = useState('');
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     axios
       .get(`https://remac.co.kr/dialog/${pk}/`, {
         headers: { Authorization: `Bearer ${authToken.access}` },

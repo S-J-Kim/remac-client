@@ -14,6 +14,7 @@ export default function RewardPaymentPage() {
   const location = useLocation();
   const { request, creatorName } = location.state;
   useEffect(() => {
+    window.scrollTo(0, 0);
     Fetchers.getUserInformation({ authToken: authToken.access }).then((res) =>
       setUserNickName(res.nickname)
     );
