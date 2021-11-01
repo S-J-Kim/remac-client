@@ -15,13 +15,17 @@ REMAC에서는 내가 원하는 아이디어를 유튜버에게 요청하고 영
 |Base UI Components<br>Base Styling Contexts<br>Request Chat Page<br>Mypage (Creator, Requestor)|Base Auth Hooks<br>API Fetcher<br>Signup Page<br>Main page|Backend Develop<br>[REMAC-server](https://github.com/castlemin/REMAC)|
 
 ## Tech Spec
-<img src="https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=CSS3&logoColor=white"/> <img src="https://img.shields.io/badge/JavaScript(ES6+)-F7DF1E?style=for-the-badge&logo=JavaScript&logoColor=black"/> <img src="https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=React&logoColor=black"/> <img src="https://img.shields.io/badge/AWS-232F3E?style=for-the-badge&logo=Amazon AWS&logoColor=white"/>  <img src="https://img.shields.io/badge/Django-092E20?style=for-the-badge&logo=Django&logoColor=white"/>
+<img src="https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=CSS3&logoColor=white"/> <img src="https://img.shields.io/badge/JavaScript(ES6+)-F7DF1E?style=for-the-badge&logo=JavaScript&logoColor=black"/> <img src="https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=React&logoColor=black"/> <img src="https://img.shields.io/badge/AWS-232F3E?style=for-the-badge&logo=Amazon AWS&logoColor=white"/>  <img src="https://img.shields.io/badge/Django-092E20?style=for-the-badge&logo=Django&logoColor=white"/> <img src="https://img.shields.io/badge/MySQL-4479A1?style=for-the-badge&logo=MySQL&logoColor=white"/> <img src="https://img.shields.io/badge/JWT-4479A1?style=for-the-badge&logo=JSON Web Tokens&logoColor=white"/> 
 
 ## Used Libraries (Front-end)
 - React-Router (for routing)
 - Axios (for fetching APIs)
 - Styled-Components (for styling)
-- luxon (for handling time)
+- luxon (for handling dateTime)
+
+## Used Libraries (Back-end)
+- Django Rest Framework (for APIs)
+- Simple JWT (for Authentication)
 
 ## How to execute
 ```
